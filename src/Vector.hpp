@@ -185,7 +185,6 @@ void Vector<T>::reserve(const SizeType capacity)
 
   m_data.swap(tmp);
   m_capacity = capacity;
-
 }
 
 template<class T>
