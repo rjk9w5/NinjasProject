@@ -213,22 +213,23 @@ void Vector<T>::insert(const SizeType pos, ConstReferenceType value)
 {
   assert(m_capacity >= m_size);
 
-  if(pos < 0 || pos > m_size)
+  if(pos > m_size)
   {
     throw std::out_of_range("Given pos must be in interval [0, m_size]");
   }
 
   //reserve if current capacity not big enough
-  if(m_size == m_capacity)
+  if(m_size >= m_capacity)
   {
     reserve(m_capacity + 8);
   }
 
   //Scooch values [pos, m_size) right 1
-  for(SizeType i = m_size-1; i >= pos; i--)
+  for(SizeType i = m_size; i > pos; i--)
   {
-    m_data[i+1] = m_data[i];
+    m_data[i] = m_data[i-1];
   }
+
 
   //Insert value
   m_data[pos] = value;
@@ -303,7 +304,7 @@ Vector<T>& Vector<T>::operator+=(const Vector<T>& rhs)
     throw std::length_error("Vector<T>& Vector<T>::operator+=(const Vector<T>&) - Calling object and rhs must have same size");
   }
 
-  for(int i = 0; i < this->size(); i++)
+  for(SizeType i = 0; i < m_size; i++)
   {
     m_data[i] += rhs.m_data[i];
   }
@@ -313,12 +314,12 @@ Vector<T>& Vector<T>::operator+=(const Vector<T>& rhs)
 template<class T>
 Vector<T>& Vector<T>::operator-=(const Vector<T>& rhs)
 {
-  if(this->size() != rhs.size())
+  if(m_size != rhs.m_size)
   {
     throw std::length_error("Vector<T>& Vector<T>::operator+=(const Vector<T>&) - Calling object and rhs must have same size");
   }
 
-  for(SizeType i = 0; i < this->size(); i++)
+  for(SizeType i = 0; i < m_size; i++)
   {
     m_data[i] -= rhs.m_data[i];
   }
@@ -326,7 +327,7 @@ Vector<T>& Vector<T>::operator-=(const Vector<T>& rhs)
 }
 
 template<class T>
-Vector<T>& Vector<T>::operator*=(const T& rhs)
+Vector<T>& Vector<T>::operator*=(ConstReferenceType rhs)
 {
   for(SizeType i = 0; i < m_size; i++)
   {
