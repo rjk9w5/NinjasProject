@@ -1,0 +1,4 @@
+tester.o: src/tester.cpp RLib/include/Test.h RLib/include/Singleton.h \
+ RLib/src/Singleton.hpp RLib/include/Ansi.h RLib/src/Test.hpp \
+ RLib/include/TestDefines.h tests/test_Vector.h include/Vector.h \
+ src/Vector.hpp
