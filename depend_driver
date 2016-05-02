@@ -1,8 +1,0 @@
-driver.o: src/driver.cpp include/AMatrix.h include/MatrixType.h \
- include/Vector.h src/Vector.hpp src/AMatrix.hpp include/DenseMatrix.h \
- include/AMatrix.h src/DenseMatrix.hpp include/TridiagMatrix.h \
- include/DenseMatrix.h src/TridiagMatrix.hpp include/MatrixType.h \
- include/UpperTriMatrix.h include/SymDenseMatrix.h src/SymDenseMatrix.hpp \
- src/UpperTriMatrix.hpp include/DiagonalMatrix.h include/TridiagMatrix.h \
- src/DiagonalMatrix.hpp include/SymDenseMatrix.h include/QrDecomp.h \
- include/LpNorm.h include/Vector.h
