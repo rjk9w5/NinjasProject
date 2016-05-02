@@ -20,8 +20,8 @@
 
 .PHONY: all clean depend_tester depend_driver
 
-CXX = g++
-#CXX = clang++
+#CXX = g++
+CXX = clang++
 
 ### Flags
 CXXFLAGS = -g -Wall -W -pedantic-errors -std=c++11

@@ -125,32 +125,39 @@ template<class T>
 class AMatrix
 {
 public:
-  AMatrix(const MatrixType& type, const int m, const int n);
-  AMatrix(const AMatrix& other);
-  AMatrix(AMatrix&& other);
+  typedef T ValueType;
+  typedef T& ReferenceType;
+  typedef const T& ConstReferenceType;
+  typedef T* PointerType;
+  typedef const T* ConstPointerType;
+  typedef size_t  SizeType;
+
+  AMatrix(const MatrixType& type, const SizeType rows, const SizeType cols);
+  AMatrix(const AMatrix<T>& other);
+  AMatrix(AMatrix<T>&& other);
   virtual ~AMatrix();
 
-  int rows() const { return m_rows; }
-  int cols() const { return m_cols; }
+  SizeType rows() const { return m_rows; }
+  SizeType cols() const { return m_cols; }
 
-  virtual T get(const int m, const int n) const = 0;
-  virtual Vector<T> getRow(const int m) const = 0;
-  virtual Vector<T> getCol(const int n) const = 0;
+  virtual ValueType get(const SizeType row, const SizeType col) const = 0;
+  virtual Vector<T> getRow(const SizeType row) const;
+  virtual Vector<T> getCol(const SizeType col) const;
 
-  virtual void set(const int m, const int n, const T& value) = 0;
-  virtual void setRow(const int m, const Vector<T>& values) = 0;
-  virtual void setCol(const int n, const Vector<T>& values) = 0;
+  virtual void set(const SizeType row, const SizeType col, ConstReferenceType value) = 0;
+  virtual void setRow(const SizeType row, const Vector<T>& values);
+  virtual void setCol(const SizeType col, const Vector<T>& values);
 
   MatrixType type() const { return m_type; }
 
-  virtual std::istream& input(std::istream& stream) = 0;
-  virtual std::ostream& output(std::ostream& stream) const = 0;
-  virtual bool equalTo(const AMatrix<T>& other) const = 0;
+  virtual std::istream& input(std::istream& stream);
+  virtual std::ostream& output(std::ostream& stream) const;
+  virtual bool equalTo(const AMatrix<T>& other) const;
 
 protected:
   MatrixType m_type;
-  int m_rows;
-  int m_cols;
+  SizeType m_rows;
+  SizeType m_cols;
 
 };
 
@@ -161,10 +168,10 @@ template<class T>
 std::ostream& operator<<(std::ostream& lhs, const AMatrix<T>& rhs) { return rhs.output(lhs); }
 
 template<class T>
-bool operator==(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return lhs.equalTo(rhs); }
+bool operator==(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return lhs.isEqual(rhs); }
 
 template<class T>
-bool operator!=(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return !(lhs == rhs); }
+bool operator!=(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return !lhs.isEqual(rhs); }
 
 #include "src/AMatrix.hpp"
 #endif

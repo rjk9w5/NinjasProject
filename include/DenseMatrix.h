@@ -187,38 +187,29 @@ template<class T>
 class DenseMatrix: public AMatrix<T>
 {
 public:
-  DenseMatrix(const int m, const int n);
-  DenseMatrix(const std::initializer_list< Vector<T> >& rows);
+  using ValueType = typename AMatrix<T>::ValueType;
+  using ReferenceType = typename AMatrix<T>::ReferenceType;
+  using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
+  using PointerType = typename AMatrix<T>::PointerType;
+  using ConstPointerType = typename AMatrix<T>::ConstPointerType;
+  using SizeType = typename AMatrix<T>::SizeType;
+
+  DenseMatrix(const SizeType rows, const SizeType cols);
+  DenseMatrix(const SizeType rows, const SizeType cols, const std::initializer_list< ValueType >& l);
   DenseMatrix(const DenseMatrix<T>& other);
   DenseMatrix(DenseMatrix<T>&& other);
-  virtual ~DenseMatrix();
+  ~DenseMatrix();
 
   DenseMatrix<T>& operator=(const DenseMatrix<T>& other);
   DenseMatrix<T>& operator=(DenseMatrix<T>&& other);
 
+  ValueType get(const SizeType row, const SizeType col) const;
 
-  virtual T get(const int m, const int n) const;
-  virtual Vector<T> getRow(const int m) const;
-  virtual Vector<T> getCol(const int n) const;
-
-  virtual void set(const int m, const int n, const T& value);
-  virtual void setRow(const int m, const Vector<T>& values);
-  virtual void setCol(const int n, const Vector<T>& values);
-
-  virtual std::istream& input(std::istream& stream);
-  virtual std::ostream& output(std::ostream& stream) const;
-  virtual bool equalTo(const AMatrix<T>& other) const;
-
-  DenseMatrix<T> transpose() const;
+  void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
 protected:
-  Vector<T> m_data;
-
-
+  Vector<ValueType> m_data;
 };
-
-template<class T>
-DenseMatrix<T> operator*(const DenseMatrix<T>& lhs, const DenseMatrix<T>& rhs);
 
 #include "src/DenseMatrix.hpp"
 #endif

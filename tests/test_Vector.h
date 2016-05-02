@@ -199,7 +199,7 @@ void test_Vector()
     VERIFY_EQ(v.size(), 0);
     VERIFY_EQ(v.capacity(), 10);
 
-    for(int i = 0; i < v.capacity(); i++) {
+    for(Vector<int>::SizeType i = 0; i < v.capacity(); i++) {
       v.pushBack(1337);
     }
     VERIFY_EQ(v[9], 1337);

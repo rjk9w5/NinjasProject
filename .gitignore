@@ -29,6 +29,8 @@
 driver
 tester
 
+depend_*
+
 # Makefile products
 depend
 *.off

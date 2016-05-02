@@ -7,9 +7,9 @@
 #include "RLib/include/Test.h"
 
 #include "tests/test_Vector.h"
+#include "tests/test_DenseMatrix.h"
 
 #include <iostream>
-
 
 int main(int argc, char** argv)
 {
@@ -17,6 +17,7 @@ int main(int argc, char** argv)
 
   // Put functions containing tests here
   test_Vector();
+  test_DenseMatrix();
 
   END_GLOBAL_TESTS;
 
