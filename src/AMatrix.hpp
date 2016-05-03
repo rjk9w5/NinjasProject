@@ -4,6 +4,8 @@
 /// @brief Implementation of base Matrix class
 //////////////////////////////////////////////////////////////////////
 
+#include "Utils.h"
+
 template<class T>
 AMatrix<T>::AMatrix(const MatrixType& type, const SizeType rows, const SizeType cols): m_type(type), m_rows(rows), m_cols(cols)
 {
@@ -30,7 +32,7 @@ Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getRow(const SizeType row) co
 {
   if(row >= m_rows)
   {
-    throw std::out_of_range("Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getRow(const SizeType row) const - Given row out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given row out of range") );
   }
 
   Vector<ValueType> tmp(m_cols);
@@ -46,7 +48,7 @@ Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getCol(const SizeType col) co
 {
   if(col >= m_cols)
   {
-    throw std::out_of_range("Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getCol(const SizeType col) const - Given column out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given column out of range") );
   }
 
   Vector<ValueType> tmp(m_rows);
@@ -62,11 +64,11 @@ void AMatrix<T>::setRow(const SizeType row, const Vector< typename AMatrix<T>::V
 {
   if(row >= m_rows)
   {
-    throw std::out_of_range("void AMatrix<T>::setRow(const SizeType row, const Vector< typename AMatrix<T>::ValueType >& values) - Given row out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given row out of range") );
   }
   if(values.size() != m_cols)
   {
-    throw std::out_of_range("void AMatrix<T>::setRow(const SizeType row, const Vector< typename AMatrix<T>::ValueType >& values) - Given values length out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given values length out of range") );
   }
 
   for(SizeType i = 0; i < m_cols; i++)
@@ -80,11 +82,11 @@ void AMatrix<T>::setCol(const SizeType col, const Vector<T>& values)
 {
   if(col >= m_cols)
   {
-    throw std::out_of_range("void AMatrix<T>::setCol(const SizeType col, const Vector< typename AMatrix<T>::ValueType >& values) - Given column out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given column out of range") );
   }
   if(values.size() != m_rows)
   {
-    throw std::out_of_range("void AMatrix<T>::setCol(const SizeType col, const Vector< typename AMatrix<T>::ValueType >& values) - Given values length out of range");
+    throw std::out_of_range( GEN_EXCEPT("Given values length out of range") );
   }
 
   for(SizeType i = 0; i < m_rows; i++)

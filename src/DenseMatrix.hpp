@@ -6,6 +6,8 @@
 
 #include <iomanip>
 
+#include "Utils.h"
+
 template<class T>
 DenseMatrix<T>::DenseMatrix(const SizeType m, const SizeType n): AMatrix<T>(MatrixType::DENSE, m, n), m_data(m*n)
 {
@@ -17,7 +19,7 @@ DenseMatrix<T>::DenseMatrix(const SizeType rows, const SizeType cols , const std
 {
   if(l.size() != m_data.size())
   {
-    //throw std::length_error(__FILE__":"LINE_STRING": Bad juju");
+    throw std::length_error( GEN_EXCEPT("Initializer list must be same size as row*cols") );
   }
 }
 
