@@ -10,12 +10,11 @@
 enum MatrixType {
   ABSTRACT,
   DENSE,
-  SPARSE,
+  BANDED,
   TRIDIAGONAL,
-  DIAGONAL,
   UPPERTRI,
   LOWERTRI,
-  SYMMETRIC_DENSE,
+  SYMMETRIC,
   COUNT, //Count of MatrixTypes
   INVALID
 };

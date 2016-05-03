@@ -8,6 +8,7 @@
 
 #include "tests/test_Vector.h"
 #include "tests/test_DenseMatrix.h"
+#include "tests/test_BandedMatrix.h"
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ int main(int argc, char** argv)
   // Put functions containing tests here
   test_Vector();
   test_DenseMatrix();
+  test_BandedMatrix();
 
   END_GLOBAL_TESTS;
 
