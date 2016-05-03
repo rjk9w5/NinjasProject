@@ -1,52 +1,52 @@
 //////////////////////////////////////////////////////////////////////
-/// @file SymDenseMatrix
+/// @file SymmetricMatrix
 /// @author Your name and class section here
 /// @brief A brief description of the file
 //////////////////////////////////////////////////////////////////////
 
-#ifndef SYM_DENSE_MATRIX_H
-#define SYM_DENSE_MATRIX_H
+#ifndef SYMMETRIC_MATRIX_H
+#define SYMMETRIC_MATRIX_H
 
-#include "DenseMatrix.h"
+#include "AMatrix.h"
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymDenseMatrix(const int);
+/// @fn SymmetricMatrix(const int);
 /// @brief M x M constructor
-/// @pre See SymDenseMatrix<T>(const int)
+/// @pre See SymmetricMatrix<T>(const int)
 /// @post Constructs Upper triangular matrix with M x M size
 /// @param m Size to allocate for Matrix
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymDenseMatrix(const SymDenseMatrix<T>&);
+/// @fn SymmetricMatrix(const SymmetricMatrix<T>&);
 /// @brief Copy constructor
-/// @pre See SymDenseMatrix<T>(const SymDenseMatrix<T>&)
+/// @pre See SymmetricMatrix<T>(const SymmetricMatrix<T>&)
 /// @post Constructs copied object
 /// @param other Object to be copied
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymDenseMatrix(SymDenseMatrix<T>&&);
+/// @fn SymmetricMatrix(SymmetricMatrix<T>&&);
 /// @brief Move constructor
-/// @pre See SymDenseMatrix<T>(SymDenseMatrix<T>&&)
+/// @pre See SymmetricMatrix<T>(SymmetricMatrix<T>&&)
 /// @post Moves to copied object
 /// @param other Object to be moved
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymDenseMatrix<T>& operator=(const SymDenseMatrix<T>& rhs);
+/// @fn SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& rhs);
 /// @brief Copy assignment
-/// @pre See SymDenseMatrix::operator=(const SymDenseMatrix<T>&);
+/// @pre See SymmetricMatrix::operator=(const SymmetricMatrix<T>&);
 /// @post Copies data from rhs to calling object
 /// @param rhs Right hand side object
 /// @return Calling Object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymDenseMatrix<T>& operator=(SymDenseMatrix<T>&& rhs);
+/// @fn SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& rhs);
 /// @brief Copy assignment
-/// @pre See SymDenseMatrix::operator=(const SymDenseMatrix<T>&);
+/// @pre See SymmetricMatrix::operator=(const SymmetricMatrix<T>&);
 /// @post Copies data from rhs to calling object
 /// @param rhs Right hand side object
 /// @return Calling Object
@@ -72,24 +72,33 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @class SymDenseMatrix
+/// @class SymmetricMatrix
 /// @brief Symmetric Dense Matrix
 //////////////////////////////////////////////////////////////////////
 template<class T>
-class SymDenseMatrix: public DenseMatrix<T>
+class SymmetricMatrix: public AMatrix<T>
 {
 public:
-  SymDenseMatrix(const int m);
-  SymDenseMatrix(const SymDenseMatrix<T>& other);
-  SymDenseMatrix(SymDenseMatrix<T>&& other);
-  virtual ~SymDenseMatrix();
+  using ValueType = typename AMatrix<T>::ValueType;
+  using ReferenceType = typename AMatrix<T>::ReferenceType;
+  using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
+  using PointerType = typename AMatrix<T>::PointerType;
+  using ConstPointerType = typename AMatrix<T>::ConstPointerType;
+  using SizeType = typename AMatrix<T>::SizeType;
 
-  SymDenseMatrix<T>& operator=(const SymDenseMatrix<T>& rhs);
-  SymDenseMatrix<T>& operator=(SymDenseMatrix<T>&& rhs);
+  SymmetricMatrix(const int rowcols);
+  SymmetricMatrix(const SymmetricMatrix<T>& other);
+  SymmetricMatrix(SymmetricMatrix<T>&& other);
+  virtual ~SymmetricMatrix();
 
-  virtual T get(const int m, const int n) const { return DenseMatrix<T>::get(m, n); }
-  virtual void set(const int m, const int n, const T& value);
+  SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& rhs);
+  SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& rhs);
+
+  virtual ValueType get(const SizeType row, const SizeType col) const;
+  virtual void set(const SizeType row, const SizeType col, const ValueType& value);
+protected:
+  Vector<ValueType> m_data;
 };
 
-#include "src/SymDenseMatrix.hpp"
+#include "src/SymmetricMatrix.hpp"
 #endif
