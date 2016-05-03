@@ -21,6 +21,7 @@ DenseMatrix<T>::DenseMatrix(const SizeType rows, const SizeType cols , const std
   {
     throw std::length_error( GEN_EXCEPT("Initializer list must be same size as row*cols") );
   }
+  std::copy(l.begin(), l.end(), m_data.begin());
 }
 
 template<class T>
