@@ -4,8 +4,6 @@
 /// @brief  Unit tests for Vector<T>
 //////////////////////////////////////////////////////////////////////
 
-#include "Utils.h"
-
 #ifndef TEST_DENSEMATRIX_H
 #define TEST_DENSEMATRIX_H
 

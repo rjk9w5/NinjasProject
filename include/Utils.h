@@ -7,5 +7,7 @@
 
 
 #define GEN_EXCEPT(msg) "ERROR: " __FILE__ ":" LINE_STRING " - " msg
+#define SUB_UNSIGNED(u1, u2) ((u1) < (u2) ? -1*((u2)) - (u1)) \
+                                          : (u1) - (u2))
 
 #endif
