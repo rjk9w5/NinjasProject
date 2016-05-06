@@ -25,6 +25,14 @@ void test_DenseMatrix()
     VERIFY_EQ(m.rows(), 3);
     VERIFY_EQ(m.cols(), 4);
 
+    for(int i = 0; i < m.rows(); i++)
+    {
+      for(int j = 0; j < m.cols(); j++)
+      {
+        VERIFY_EQ(m.get(i, j), 0);
+      }
+    }
+
     m.set(0, 0, 1); m.set(0, 1, 2); m.set(0, 2, 3); m.set(0, 3, 4);
     m.set(1, 0, 5); m.set(1, 1, 6); m.set(1, 2, 7); m.set(1, 3, 8);
     m.set(2, 0, 9); m.set(2, 1, 10); m.set(2, 2, 11); m.set(2, 3, 12);

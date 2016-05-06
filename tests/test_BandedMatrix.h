@@ -22,16 +22,16 @@ void test_BandedMatrix()
     VERIFY_EQ(m1.upperBands(), 1);
     VERIFY_EQ(m1.lowerBands(), 1);
 
-    BandedMatrix<int> m2(7, 7, 0, 5);
+    BandedMatrix<int> m2(7, 7, 1, 5);
     VERIFY_EQ(m2.rows(), 7);
     VERIFY_EQ(m2.cols(), 7);
-    VERIFY_EQ(m2.upperBands(), 0);
+    VERIFY_EQ(m2.upperBands(), 1);
     VERIFY_EQ(m2.lowerBands(), 5);
 
-    BandedMatrix<int> m3(5, 3, 1, 1);
+    BandedMatrix<int> m3(5, 4, 2, 1);
     VERIFY_EQ(m3.rows(), 5);
-    VERIFY_EQ(m3.cols(), 3);
-    VERIFY_EQ(m3.upperBands(), 1);
+    VERIFY_EQ(m3.cols(), 4);
+    VERIFY_EQ(m3.upperBands(), 2);
     VERIFY_EQ(m3.lowerBands(), 1);
 
     BandedMatrix<int> m4(3, 4, 1, 1);
@@ -76,6 +76,34 @@ void test_BandedMatrix()
     m.set(4,3, 3);
     m.set(5,4, 3);
     m.set(6,5, 3);
+
+    VERIFY_EQ(m.get(0, 0), 1 );
+    VERIFY_EQ(m.get(1, 1), 1 );
+    VERIFY_EQ(m.get(2, 2), 1 );
+    VERIFY_EQ(m.get(3, 3), 1 );
+    VERIFY_EQ(m.get(4, 4), 1 );
+    VERIFY_EQ(m.get(5, 5), 1 );
+    VERIFY_EQ(m.get(6, 6), 1 );
+
+    VERIFY_EQ(m.get(0, 1), 2 );
+    VERIFY_EQ(m.get(1, 2), 2 );
+    VERIFY_EQ(m.get(2, 3), 2 );
+    VERIFY_EQ(m.get(3, 4), 2 );
+    VERIFY_EQ(m.get(4, 5), 2 );
+    VERIFY_EQ(m.get(5, 6), 2 );
+
+    VERIFY_EQ(m.get(0, 2), 4 );
+    VERIFY_EQ(m.get(1, 3), 4 );
+    VERIFY_EQ(m.get(2, 4), 4 );
+    VERIFY_EQ(m.get(3, 5), 4 );
+    VERIFY_EQ(m.get(4, 6), 4 );
+
+    VERIFY_EQ(m.get(1,0), 3 );
+    VERIFY_EQ(m.get(2,1), 3 );
+    VERIFY_EQ(m.get(3,2), 3 );
+    VERIFY_EQ(m.get(4,3), 3 );
+    VERIFY_EQ(m.get(5,4), 3 );
+    VERIFY_EQ(m.get(6,5), 3 );
 
     std::cout << m << std::endl;
   END_TEST;

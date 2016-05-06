@@ -8,7 +8,7 @@
 
 template<class T>
 BandedMatrix<T>::BandedMatrix(const SizeType rows, const SizeType cols, const SizeType upperBands, const SizeType lowerBands):
-  AMatrix<T>(MatrixType::BANDED, rows, cols), m_upperBands(upperBands), m_lowerBands(lowerBands),
+  AMatrix<T>(rows, cols), m_upperBands(upperBands), m_lowerBands(lowerBands),
   m_data(upperBands + lowerBands + 1, cols)
 {
   if(m_upperBands + m_lowerBands + 1 > std::min(this->rows(), this->cols()))
@@ -36,16 +36,10 @@ BandedMatrix<T>::BandedMatrix(BandedMatrix<ValueType>&& other):
 template<class T>
 BandedMatrix<T>& BandedMatrix<T>::operator=(const BandedMatrix<T>& other)
 {
-  assert(other.type() == MatrixType::BANDED);
   assert(other.m_upperBands + other.m_lowerBands + 1 <= std::min(other.rows(), other.cols()));
   if(this != &other)
   {
-    this->m_type = MatrixType::BANDED;
-    this->m_rows = other.rows();
-    this->m_cols = other.cols();
-    this->m_upperBands = other.m_upperBands;
-    this->m_lowerBands = other.m_lowerBands;
-    m_data = other.m_data;
+    copy(other);
   }
   return *this;
 }
@@ -53,16 +47,10 @@ BandedMatrix<T>& BandedMatrix<T>::operator=(const BandedMatrix<T>& other)
 template<class T>
 BandedMatrix<T>& BandedMatrix<T>::operator=(BandedMatrix<T>&& other)
 {
-  assert(other.type() == MatrixType::BANDED);
   assert(other.m_upperBands + other.m_lowerBands + 1 <= std::min(other.rows(), other.cols()));
   if(this != &other)
   {
-    this->m_type = MatrixType::BANDED;
-    this->m_rows = other.rows();
-    this->m_cols = other.cols();
-    this->m_upperBands = other.m_upperBands;
-    this->m_lowerBands = other.m_lowerBands;
-    m_data = std::move(other.m_data);
+    move(other);
   }
   return *this;
 }
@@ -103,4 +91,59 @@ void BandedMatrix<T>::set(const SizeType row, const SizeType col, ConstReference
   {
     // Do nothing, setting unbanded value to 0
   }
+}
+
+template<class T>
+std::ostream& BandedMatrix<T>::output(std::ostream& stream) const
+{
+  for(SizeType i = 0; i < this->rows(); i++)
+  {
+    for(SizeType j = 0; j < this->cols(); j++)
+    {
+      stream << std::setw(8);
+      if(j + m_lowerBands >= i && j <= i + m_upperBands)
+      {
+        stream << m_data.get(m_upperBands + i - j, j);
+      }
+      else
+      {
+        stream << '-';
+      }
+      stream << " ";
+    }
+    stream << std::endl;
+  }
+  return stream;
+}
+
+template<class T>
+BandedMatrix<T>& BandedMatrix<T>::copy(const BandedMatrix<T>& other)
+{
+  m_upperBands = other.m_upperBands;
+  m_lowerBands = other.m_lowerBands;
+  m_data = other.m_data;
+  AMatrix<T>::copy(other);
+  return *this;
+}
+
+template<class T>
+BandedMatrix<T>& BandedMatrix<T>::swap(BandedMatrix<T>& other)
+{
+  using std::swap;
+  swap(m_upperBands, other.m_upperBands);
+  swap(m_lowerBands, other.m_lowerBands);
+  swap(m_data, other.m_data);
+  AMatrix<T>::swap(other);
+  return *this;
+}
+
+template<class T>
+BandedMatrix<T>& BandedMatrix<T>::move(BandedMatrix<T>&& other)
+{
+  using std::move;
+  move(m_upperBands, other.m_upperBands);
+  move(m_lowerBands, other.m_lowerBands);
+  move(m_data, other.m_data);
+  AMatrix<T>::move(other);
+  return *this;
 }

@@ -25,12 +25,19 @@ public:
   BandedMatrix(const BandedMatrix<ValueType>& other);
   BandedMatrix(BandedMatrix<ValueType>&& other);
 
+  virtual MatrixType type() const { return MatrixType::BANDED; }
+
   BandedMatrix<T>& operator=(const BandedMatrix<T>& other);
   BandedMatrix<T>& operator=(BandedMatrix<T>&& other);
 
-  ValueType get(const SizeType row, const SizeType col) const;
+  virtual ValueType get(const SizeType row, const SizeType col) const;
+  virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
-  void set(const SizeType row, const SizeType col, ConstReferenceType value);
+  virtual std::ostream& output(std::ostream& stream) const;
+
+  BandedMatrix<T>& copy(const BandedMatrix<T>& other);
+  BandedMatrix<T>& swap(BandedMatrix<T>& other);
+  BandedMatrix<T>& move(BandedMatrix<T>&& other);
 
   SizeType upperBands() const { return m_upperBands; }
   SizeType lowerBands() const { return m_lowerBands; }

@@ -9,8 +9,7 @@
 
 #include <iostream>
 
-#include "AMatrix.h"
-#include "DenseMatrix.h"
+#include "BandedMatrix.h"
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
@@ -155,30 +154,29 @@
 /// @brief Tridiagonal Matrix
 //////////////////////////////////////////////////////////////////////
 template<class T>
-class TridiagMatrix: public AMatrix<T>
+class TridiagMatrix: public DiagonalMatrix<T>
 {
 public:
-  TridiagMatrix();
-  TridiagMatrix(const int m, const int n);
+  using ValueType = typename AMatrix<T>::ValueType;
+  using ReferenceType = typename AMatrix<T>::ReferenceType;
+  using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
+  using PointerType = typename AMatrix<T>::PointerType;
+  using ConstPointerType = typename AMatrix<T>::ConstPointerType;
+  using SizeType = typename AMatrix<T>::SizeType;
+
+  TridiagMatrix(const int size);
   TridiagMatrix(const TridiagMatrix<T>& src);
   TridiagMatrix(TridiagMatrix<T>&& src);
-  ~TridiagMatrix();
+  virtual ~TridiagMatrix() {}
 
-  virtual T get(const int row, const int col) const;
-  virtual Vector<T> getRow(const int row) const;
-  virtual Vector<T> getCol(const int col) const;
+  TridiagMatrix<T> operator=(const TridiagMatrix<T>& other);
+  TridiagMatrix<T> operator=(TridiagMatrix<T>&& other);
 
-  virtual void set(const int row, const int col, const T& value);
-  virtual void setRow(const int row, const Vector<T>& values);
-  virtual void setCol(const int col, const Vector<T>& values);
+  TridiagMatrix<T>& copy(const TridiagMatrix<T>& other) { return BandedMatrix<T>::copy(other); }
+  TridiagMatrix<T>& swap(TridiagMatrix<T>& other) { return BandedMatrix<T>::swap(other); }
+  TridiagMatrix<T>& move(TridiagMatrix<T>&& other) { return BandedMatrix<T>::move(other); }
 
-  virtual std::istream& input(std::istream& stream);
-  virtual std::ostream& output(std::ostream& stream) const;
-  virtual bool equalTo(const AMatrix<T>& other) const;
-
-protected:
-  DenseMatrix<T> m_data;
-
+  virtual MatrixType type() const { return MatrixType::TRIDIAGONAL; }
 };
 
 #include "src/TridiagMatrix.hpp"

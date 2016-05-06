@@ -373,8 +373,10 @@ public:
   void erase(const SizeType pos);
   void pushBack(ConstReferenceType value);
   void popBack();
-  void swap(Vector<ValueType>& other);
-  void copy(const Vector<ValueType>& other);
+
+  Vector<ValueType>& swap(Vector<ValueType>& other);
+  Vector<ValueType>& copy(const Vector<ValueType>& other);
+  Vector<ValueType>& move(Vector<ValueType>&& other);
 
   std::istream& input(std::istream& stream);
   std::ostream& output(std::ostream& stream) const;
