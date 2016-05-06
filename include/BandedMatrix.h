@@ -21,7 +21,7 @@ public:
   using ConstPointerType = typename AMatrix<T>::ConstPointerType;
   using SizeType = typename AMatrix<T>::SizeType;
 
-  BandedMatrix(const SizeType rows, const SizeType bands);
+  BandedMatrix(const SizeType rows, const SizeType cols, const SizeType upperBands, const SizeType lowerBands);
   BandedMatrix(const BandedMatrix<ValueType>& other);
   BandedMatrix(BandedMatrix<ValueType>&& other);
 
@@ -32,10 +32,14 @@ public:
 
   void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
-  SizeType bands() const { return m_data.rows(); }
+  SizeType upperBands() const { return m_upperBands; }
+  SizeType lowerBands() const { return m_lowerBands; }
 
 private:
+  SizeType m_upperBands;
+  SizeType m_lowerBands;
   DenseMatrix<ValueType> m_data;
+
 };
 
 #include "src/BandedMatrix.hpp"

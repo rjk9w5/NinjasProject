@@ -8,5 +8,4 @@
 
 #define GEN_EXCEPT(msg) "ERROR: " __FILE__ ":" LINE_STRING " - " msg
 
-
 #endif

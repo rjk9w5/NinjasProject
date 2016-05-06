@@ -117,7 +117,7 @@ std::ostream& AMatrix<T>::output(std::ostream& stream) const
   {
     for(SizeType j = 0; j < m_cols; j++)
     {
-      stream << this->get(i, j) << " ";
+      stream << std::setw(12) << this->get(i, j) << " ";
     }
     stream << std::endl;
   }
