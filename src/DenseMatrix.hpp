@@ -58,11 +58,6 @@ DenseMatrix<T>& DenseMatrix<T>::operator=(DenseMatrix<T>&& other)
 template<class T>
 typename DenseMatrix<T>::ValueType DenseMatrix<T>::get(const SizeType row, const SizeType col) const
 {
-  // if(row >= this->rows() || col >= this->cols())
-  // {
-  //   throw std::out_of_range("Given row, col must be in interval [0, rows), [0, cols)");
-  // }
-
   return m_data[row * this->cols() + col];
 }
 

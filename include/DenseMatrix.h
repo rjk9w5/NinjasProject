@@ -75,18 +75,6 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::rows()
-/// @brief Row number accessor - gets the number of rows in the DenseMatrix
-/// @return The number of rows
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::cols()
-/// @brief Column number accessor - gets the number of columns in the DenseMatrix
-/// @return The number of columns
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
 /// @fn DenseMatrix<T>::get(const int, const int)
 /// @brief Item introspection - access matrix element at given row & column
 /// @post Throws std::out_of_range if row or col are out of bounds of matrix dimensions
@@ -107,76 +95,36 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::getRow(const int row)
-/// @brief Row-wise accessor - gets the row as a Vector
-/// @post Throws std::out_of_range if row is out of bounds (from get(int, int))
+/// @fn getPtr(const SizeType, const SizeType)
+/// @brief gets pointer at given row, col
+/// @pre given row, col should be within bounds of matrix
 /// @param row Row index
-/// @return Vector of values at given row
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::getCol(const int)
-/// @brief Column-wise accessor - gets the col as a Vector
-/// @post Throws std::out_of_range if row is out of bounds (from get(int, int))
 /// @param col Column index
-/// @return Vector of values at given column
+/// @return pointer to value at row,col if exists, nullptr otherwise
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::setRow(const int, const Vector<T>&)
-/// @brief Row-wise mutator - set the values at the given row
-/// @post The row at the given index is updated with values from data
-/// @post Throws std::length_error if row out of bounds or data not same size
-/// @param row Row index to set
-/// @param data Data to copy over existing data
+/// @fn copy(const DenseMatrix<T>&)
+/// @brief copies from other to CO
+/// @post CO is now a copy of other
+/// @param other Matrix to copy from
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::setCol(const int, const Vector<T>&)
-/// @brief Column-wise mutator - set the values at the given column
-/// @post The column at the given index is updated with values from data
-/// @post Throws std::length_error if column out of bounds or data not same size
-/// @param col Column index to set
-/// @param data Data to copy over existing data
+/// @fn swap(DenseMatrix<T>&)
+/// @brief swaps CO with other
+/// @post CO and other are swapped
+/// @param other Matrix to swap with
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T>::transpose()
-/// @brief Returns a transposed matrix
-/// @return A transposed version of the calling object
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::istream& DenseMatrix<T>::input(std::istream& stream);
-/// @brief retrieves matrix from virtual interface.
-/// @pre size must be set before inserting data from stream
-/// @post Updates matrix with correct data
-/// @return updated input stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::ostream& DenseMatrix<T>::output(std::ostream& stream);
-/// @brief outputs matrix from virtual interface to stream.
-/// @pre operator<<(ostream, T) must be defined
-/// @post Updates matrix with correct data
-/// @return updated input stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn bool DenseMatrix<T>::equalTo(const AMatrix<T>& other) const;
-/// @brief provides interface for equating equality
-/// @pre operator==(T, T) must be defined
-/// @return whether matricies are equivalent or not
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn DenseMatrix<T> operator*(const DenseMatrix<T>&, const DenseMatrix<T>&);
-/// @brief Dense matrix multiplication
-/// @pre A(N, M) * A(M, O) = A(N, O), operator+(T, T), operator*(T, T)
-/// @post Exception occurs if M sizes are different
-/// @param rhs Right hand Matrix
-/// @param lhs Left Hand Matrix
-/// @return Matrix multiplication result
+/// @fn move(DenseMatrix<T>&&)
+/// @brief move other to CO
+/// @post other becomes unusable, CO becomes other
+/// @param other Matrix to move
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////

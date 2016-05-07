@@ -58,10 +58,6 @@ BandedMatrix<T>& BandedMatrix<T>::operator=(BandedMatrix<T>&& other)
 template<class T>
 typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, const SizeType col) const
 {
-  // if(row >= this->rows() || col >= this->cols())
-  // {
-  //   throw std::out_of_range( GEN_EXCEPT("Given row, column index must be less than actual row, columns") );
-  // }
    if(col + m_lowerBands >= row && col <= row + m_upperBands)
   {
     return m_data.get(m_upperBands + row - col, col);

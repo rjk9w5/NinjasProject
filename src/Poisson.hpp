@@ -1,5 +1,8 @@
-
-// #include <fstream>
+//////////////////////////////////////////////////////////////////////
+/// @file Poisson.hpp
+/// @author Russley Shaw & Ryan Krattiger
+/// @brief Implementation to solve equations in the form of Poisson
+//////////////////////////////////////////////////////////////////////
 
 template <class T, class T_XBound, class T_YBound, class T_ForcingFunction>
 DenseMatrix<T> Poisson<T, T_XBound, T_YBound, T_ForcingFunction>::solve(const ALinSysSolver<T, BandedMatrix<T>>& solver, const size_t N)
@@ -21,7 +24,7 @@ DenseMatrix<T> Poisson<T, T_XBound, T_YBound, T_ForcingFunction>::solve(const AL
     x[i] = m_xBound.lower_bound() + h*i;
     y[i] = m_yBound.lower_bound() + h*i;
   }
-  
+
   index = 0;
   for(SizeType i=1; i <= n; ++i)
   {
@@ -57,9 +60,9 @@ DenseMatrix<T> Poisson<T, T_XBound, T_YBound, T_ForcingFunction>::solve(const AL
       {
         b[index] -= m_xBound.upper(y[j]);
       }
-      
+
       if(j==1)
-      { 
+      {
         b[index] -= m_yBound.lower(x[i]);
       }
 

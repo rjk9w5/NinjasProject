@@ -19,7 +19,6 @@ AMatrix<T>::AMatrix(const AMatrix<T>& other): m_rows(other.m_rows), m_cols(other
 template<class T>
 AMatrix<T>::AMatrix(AMatrix<T>&& other): m_rows(other.m_rows), m_cols(other.m_cols)
 {
-
 }
 
 template<class T>
@@ -144,7 +143,6 @@ std::ostream& AMatrix<T>::output(std::ostream& stream) const
   }
   return stream;
 }
-
 
 template<class T>
 std::ostream& AMatrix<T>::outputOctave(std::ostream& stream, const std::string& varname) const

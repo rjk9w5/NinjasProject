@@ -95,7 +95,7 @@
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn bool AMatrix<T>::equalTo(const AMatrix<T>& other) const;
+/// @fn bool AMatrix<T>::isEqual(const AMatrix<T>& other) const;
 /// @brief provides interface for equating equality
 /// @pre operator==(T, T) must be defined
 /// @return whether matricies are equivalent or not
@@ -115,6 +115,14 @@
 /// @param lhs output stream
 /// @param rhs Matrix to output into
 /// @return Updated output stream
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn operator*(const AMatrix<T>&, const Vector<T>&);
+/// @brief Matrix & Vector multiplication
+/// @param lhs Matrix to multiply
+/// @param rhs Vector to multiply with
+/// @return Vector<T> - Vector of product of Matrix * Vector
 //////////////////////////////////////////////////////////////////////
 
 
@@ -178,18 +186,8 @@ bool operator==(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return lhs.isEqu
 template<class T>
 bool operator!=(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return !lhs.isEqual(rhs); }
 
-template <class T> 
-Vector<T> operator*(const AMatrix<T>& lhs, const Vector<T>& rhs)
-{
-  assert(lhs.cols() == rhs.size());
-  Vector<T> ret(lhs.rows());
-  for(int i=0; i<lhs.rows(); ++i)
-  {
-    ret[i] = lhs.getRow(i)*rhs;
-  }
-
-  return ret;
-}
+template <class T>
+Vector<T> operator*(const AMatrix<T>& lhs, const Vector<T>& rhs);
 
 #include "src/AMatrix.hpp"
 #endif

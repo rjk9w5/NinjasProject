@@ -16,8 +16,8 @@ uy1_bound = @(xx) 2.*ly0_bound(xx);
 f = @(xx,yy) -2*(xx^2 + yy^2);
 
 % Solution grid sizing
-N = 50;
-M = 50;
+N = 25;
+M = 25;
 n = N-2;
 m = M-2;
 
@@ -50,7 +50,7 @@ y = linspace(y_min,y_max,M);
 % for j=n+1:n:(m-1)*n
 %   A(j:j+n-1,j:j+n-1) = B;
 %   A(j:j+n-1,j+n:j+2*n-1) = I;
-%   A(j:j+n-1,j-n:j-1) = I;  
+%   A(j:j+n-1,j-n:j-1) = I;
 % end
 
 % A(n*(m-1)+1:n*m, n*(m-1)+1:n*m) = B;
@@ -125,8 +125,8 @@ fign=1;
 %   end
 % end
 
-N = 50;
-M = 50;
+N = 25;
+M = 25;
 
 poisson_Ugs;
 poisson_Usd;

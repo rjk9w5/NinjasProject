@@ -11,65 +11,92 @@
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
-/// @fn UpperTriMatrix(const int);
-/// @brief M x M constructor
-/// @pre See SymDenseMatrix<T>(const int)
-/// @post Constructs Upper triangular matrix with M x M size
-/// @param m Size to allocate for Matrix
+/// @fn UpperTriMatrix<T>::UpperTriMatrix(const UpperTriMatrix<T>&)
+/// @brief Copy constructor - copies src to new UpperTriMatrix
+/// @post The matrix is initialized with a copy of src's data
+/// @param src UpperTriMatrix to copy from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn UpperTriMatrix(const UpperTriMatrix<T>&);
-/// @brief Copy constructor
-/// @pre See SymDenseMatrix<T>(const SymDenseMatrix<T>&)
-/// @post Constructs copied object
-/// @param other Object to be copied
+/// @fn UpperTriMatrix<T>::UpperTriMatrix(UpperTriMatrix<T>&&)
+/// @brief Move constructor - moves data from src to new UpperTriMatrix
+/// @post Old object is emptied and new object has contents of old
+/// @param src UpperTriMatrix to move from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn UpperTriMatrix(UpperTriMatrix<T>&&);
-/// @brief Move constructor
-/// @pre See SymDenseMatrix<T>(SymDenseMatrix<T>&&)
-/// @post Moves to copied object
-/// @param other Object to be moved
+/// @fn UpperTriMatrix<T>::UpperTriMatrix(const int)
+/// @brief Rectangular Constructor - constructs a rectangular UpperTriMatrix
+/// @post Constructs a UpperTriMatrix with m rows and n columns
+/// @post Throws std::out_of_range if m or n are less than 0
+/// @param size Number of rows & columns
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn UpperTriMatrix<T>& operator=(const UpperTriMatrix<T>& rhs);
-/// @brief Copy assignment
-/// @pre See SymDenseMatrix::operator=(const SymDenseMatrix<T>&);
-/// @post Copies data from rhs to calling object
-/// @param rhs Right hand side object
-/// @return Calling Object
+/// @fn UpperTriMatrix<T>::~UpperTriMatrix()
+/// @brief Destructor - deallocates internal data
+/// @post The object is ready to be destroyed
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn UpperTriMatrix<T>& operator=(UpperTriMatrix<T>&& rhs);
-/// @brief Copy assignment
-/// @pre See SymDenseMatrix::operator=(const SymDenseMatrix<T>&);
-/// @post Copies data from rhs to calling object
-/// @param rhs Right hand side object
-/// @return Calling Object
+/// @fn UpperTriMatrix<T>::operator=(const UpperTriMatrix<T>&)
+/// @brief Copy assignment - copies src to this object
+/// @post This UpperTriMatrix is a copy of src
+/// @param src UpperTriMatrix to copy from
+/// @return This object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn void set(const int m, const int n, const T& value);
-/// @brief Mutator for individual elements
-/// @pre Assignment must be defined on type T
-/// @post The set value is updated. Throws if set is in lower triangle
-/// @param m row to set
-/// @param n col to set
-/// @param value Item value to set at m, n
+/// @fn UpperTriMatrix<T>::operator=(UpperTriMatrix<T>&&)
+/// @brief Move assignment - moves from src to this object
+/// @post This object has the old contents of src and src is empty
+/// @param src UpperTriMatrix to move from
+/// @param paramName2 description of the parameter
+/// @return This object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn void get(const int m, const int n);
-/// @brief Accessor for individual elements
-/// @pre Assignment must be defined on type T
-/// @post The set value is updated. Throws if set is in lower triangle
-/// @param m row to get
-/// @param n col to get
-/// @return Item at m, n
+/// @fn UpperTriMatrix<T>::get(const int, const int)
+/// @brief Item introspection - access matrix element at given row & column
+/// @post Throws std::out_of_range if row or col are out of bounds of matrix dimensions
+/// @param row Row index to access
+/// @param col Column index to access
+/// @return Copy of data at given row and column
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn UpperTriMatrix<T>::set(const int, const int, const T&)
+/// @brief Item modification - modify matrix element at given row & column
+/// @pre Copy assignment should be defined for T
+/// @post The value at the row & column is updated with values
+/// @post Throws std::out_of_range if row or col are out of matrix bounds
+/// @param row Row index
+/// @param col Column index
+/// @param value Value to copy to row & column
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn copy(const UpperTriMatrix<T>&)
+/// @brief copies from other to CO
+/// @post CO is now a copy of other
+/// @param other Matrix to copy from
+/// @return updated calling object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn swap(UpperTriMatrix<T>&)
+/// @brief swaps CO with other
+/// @post CO and other are swapped
+/// @param other Matrix to swap with
+/// @return updated calling object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn move(UpperTriMatrix<T>&&)
+/// @brief move other to CO
+/// @post other becomes unusable, CO becomes other
+/// @param other Matrix to move
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
