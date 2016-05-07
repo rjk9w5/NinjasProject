@@ -154,7 +154,7 @@
 /// @brief Tridiagonal Matrix
 //////////////////////////////////////////////////////////////////////
 template<class T>
-class TridiagMatrix: public DiagonalMatrix<T>
+class TridiagMatrix: public BandedMatrix<T>
 {
 public:
   using ValueType = typename AMatrix<T>::ValueType;
@@ -164,13 +164,13 @@ public:
   using ConstPointerType = typename AMatrix<T>::ConstPointerType;
   using SizeType = typename AMatrix<T>::SizeType;
 
-  TridiagMatrix(const int size);
+  TridiagMatrix(const SizeType size);
   TridiagMatrix(const TridiagMatrix<T>& src);
   TridiagMatrix(TridiagMatrix<T>&& src);
   virtual ~TridiagMatrix() {}
 
-  TridiagMatrix<T> operator=(const TridiagMatrix<T>& other);
-  TridiagMatrix<T> operator=(TridiagMatrix<T>&& other);
+  TridiagMatrix<T>& operator=(const TridiagMatrix<T>& other);
+  TridiagMatrix<T>& operator=(TridiagMatrix<T>&& other);
 
   TridiagMatrix<T>& copy(const TridiagMatrix<T>& other) { return BandedMatrix<T>::copy(other); }
   TridiagMatrix<T>& swap(TridiagMatrix<T>& other) { return BandedMatrix<T>::swap(other); }

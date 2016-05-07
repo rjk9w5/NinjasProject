@@ -8,6 +8,7 @@
 #define TEST_DENSEMATRIX_H
 
 #include "DenseMatrix.h"
+#include "MatrixType.h"
 
 void test_DenseMatrix()
 {
@@ -17,6 +18,7 @@ void test_DenseMatrix()
     DenseMatrix<int> m(3, 4);
     VERIFY_EQ(m.rows(), 3);
     VERIFY_EQ(m.cols(), 4);
+    VERIFY_EQ(m.type(), MatrixType::DENSE);
   END_TEST;
 
   BEGIN_TEST("DenseMatrix::get(SizeType, SizeType)");
