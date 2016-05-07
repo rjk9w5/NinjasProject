@@ -11,6 +11,7 @@
 #include "tests/test_BandedMatrix.h"
 #include "tests/test_TridiagMatrix.h"
 #include "tests/test_SymmetricMatrix.h"
+// #include "tests/test_Poisson.h"
 
 #include <iostream>
 

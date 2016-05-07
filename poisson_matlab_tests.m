@@ -26,6 +26,8 @@ y = linspace(y_min,y_max,M);
 
 lam = (m/n)^2;
 
+h = 1/N;
+
 % Initialize A and b building blocks
 I = spdiags([1].*ones(n,1), [0],n,n);
 B = spdiags([1 -2*(lam + 1) 1].*ones(n,1), [-1 0 1],n,n);
@@ -58,7 +60,7 @@ A(n*(m-1)+1:n*m, n*(m-2)+1:n*(m-1)) = I;
 index = 1;
 for i = 2:1:n+1
   for j = 2:1:m+1
-    % b(index) = f(x(i),y(j));
+    b(index) = (h^2)*f(x(i),y(j));
 
     if(i==2)
       b(index) = b(index) - lam*lx0_bound(y(j)); index;
@@ -146,3 +148,5 @@ ylabel('y')
 xlabel('x')
 zlabel('u(x,y)')
 fign = fign + 1;
+
+input('Pause...')
