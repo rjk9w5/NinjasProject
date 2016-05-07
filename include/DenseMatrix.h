@@ -208,6 +208,8 @@ public:
   ValueType get(const SizeType row, const SizeType col) const;
   void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
+  ConstPointerType getPtr(const SizeType row, const SizeType col) const;
+
   DenseMatrix<T>& copy(const DenseMatrix<T>& other);
   DenseMatrix<T>& swap(DenseMatrix<T>& other);
   DenseMatrix<T>& move(DenseMatrix<T>&& other);

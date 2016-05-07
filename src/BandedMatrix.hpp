@@ -73,6 +73,19 @@ typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, con
 }
 
 template<class T>
+typename BandedMatrix<T>::ConstPointerType BandedMatrix<T>::getPtr(const SizeType row, const SizeType col) const
+{
+  if(col + m_lowerBands >= row && col <= row + m_upperBands)
+ {
+   return m_data.getPtr(m_upperBands + row - col, col);
+ }
+ else
+ {
+   return nullptr;
+ }
+}
+
+template<class T>
 Vector< typename BandedMatrix<T>::ValueType > BandedMatrix<T>::getRow(const SizeType row) const
 {
   Vector<ValueType> ret(this->cols());

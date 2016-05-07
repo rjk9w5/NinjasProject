@@ -33,6 +33,8 @@ public:
   virtual ValueType get(const SizeType row, const SizeType col) const;
   virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
+  virtual ConstPointerType getPtr(const SizeType row, const SizeType col) const;
+
   virtual Vector<ValueType> getRow(const SizeType row) const;
 
   virtual std::ostream& output(std::ostream& stream) const;
