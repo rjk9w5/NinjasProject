@@ -184,4 +184,4 @@ xlabel('x')
 zlabel('u(x,y)')
 fign = fign + 1;
 
-% input('Pause...')
+input('Pause...')
