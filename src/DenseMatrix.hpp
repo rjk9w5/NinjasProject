@@ -9,13 +9,13 @@
 #include "Utils.h"
 
 template<class T>
-DenseMatrix<T>::DenseMatrix(const SizeType m, const SizeType n): AMatrix<T>(MatrixType::DENSE, m, n), m_data(m*n)
+DenseMatrix<T>::DenseMatrix(const SizeType m, const SizeType n): AMatrix<T>(m, n), m_data(m*n)
 {
 }
 
 template<class T>
 DenseMatrix<T>::DenseMatrix(const SizeType rows, const SizeType cols , const std::initializer_list< ValueType >& l)
-  :AMatrix<T>(MatrixType::DENSE, rows, cols), m_data(rows * cols)
+  :AMatrix<T>(rows, cols), m_data(rows * cols)
 {
   if(l.size() != m_data.size())
   {
@@ -35,18 +35,11 @@ DenseMatrix<T>::DenseMatrix(DenseMatrix<T>&& other): AMatrix<T>(other), m_data(o
 }
 
 template<class T>
-DenseMatrix<T>::~DenseMatrix()
-{
-}
-
-template<class T>
 DenseMatrix<T>& DenseMatrix<T>::operator=(const DenseMatrix<T>& other)
 {
   if(this != &other)
   {
-    this->m_rows = other.m_rows;
-    this->m_cols = other.m_cols;
-    this->m_data = other.m_data;
+    copy(other);
   }
   return *this;
 }
@@ -56,12 +49,7 @@ DenseMatrix<T>& DenseMatrix<T>::operator=(DenseMatrix<T>&& other)
 {
   if(this != &other)
   {
-    this->m_rows = other.m_rows;
-    this->m_cols = other.m_cols;
-    m_data = std::move(other.m_data);
-
-    other.m_rows = 0;
-    other.m_cols = 0;
+    move(other);
   }
   return *this;
 }
@@ -89,8 +77,6 @@ void DenseMatrix<T>::set(const SizeType row, const SizeType col, ConstReferenceT
 }
 
 
-
-
 template<class T>
 DenseMatrix<T> operator*(const DenseMatrix<T>& lhs, const DenseMatrix<T>& rhs)
 {
@@ -115,4 +101,31 @@ DenseMatrix<T> operator*(const DenseMatrix<T>& lhs, const DenseMatrix<T>& rhs)
     }
   }
   return product;
+}
+
+
+template<class T>
+DenseMatrix<T>& DenseMatrix<T>::copy(const DenseMatrix<T>& other)
+{
+  m_data = other.m_data;
+  AMatrix<T>::copy(other);
+  return *this;
+}
+
+template<class T>
+DenseMatrix<T>& DenseMatrix<T>::swap(DenseMatrix<T>& other)
+{
+  using std::swap;
+  swap(m_data, other.m_data);
+  AMatrix<T>::swap(other);
+  return *this;
+}
+
+template<class T>
+DenseMatrix<T>& DenseMatrix<T>::move(DenseMatrix<T>&& other)
+{
+  using std::move;
+  move(m_data, other.m_data);
+  AMatrix<T>::move(other);
+  return *this;
 }

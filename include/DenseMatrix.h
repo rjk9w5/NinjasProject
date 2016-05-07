@@ -198,14 +198,19 @@ public:
   DenseMatrix(const SizeType rows, const SizeType cols, const std::initializer_list< ValueType >& l);
   DenseMatrix(const DenseMatrix<T>& other);
   DenseMatrix(DenseMatrix<T>&& other);
-  ~DenseMatrix();
+  virtual ~DenseMatrix(){}
+
+  virtual MatrixType type() const { return MatrixType::DENSE; }
 
   DenseMatrix<T>& operator=(const DenseMatrix<T>& other);
   DenseMatrix<T>& operator=(DenseMatrix<T>&& other);
 
   ValueType get(const SizeType row, const SizeType col) const;
-
   void set(const SizeType row, const SizeType col, ConstReferenceType value);
+
+  DenseMatrix<T>& copy(const DenseMatrix<T>& other);
+  DenseMatrix<T>& swap(DenseMatrix<T>& other);
+  DenseMatrix<T>& move(DenseMatrix<T>&& other);
 
 protected:
   Vector<ValueType> m_data;

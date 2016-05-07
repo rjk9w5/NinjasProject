@@ -132,10 +132,10 @@ public:
   typedef const T* ConstPointerType;
   typedef size_t  SizeType;
 
-  AMatrix(const MatrixType& type, const SizeType rows, const SizeType cols);
+  AMatrix(const SizeType rows, const SizeType cols);
   AMatrix(const AMatrix<T>& other);
   AMatrix(AMatrix<T>&& other);
-  virtual ~AMatrix();
+  virtual ~AMatrix(){}
 
   SizeType rows() const { return m_rows; }
   SizeType cols() const { return m_cols; }
@@ -148,14 +148,17 @@ public:
   virtual void setRow(const SizeType row, const Vector<T>& values);
   virtual void setCol(const SizeType col, const Vector<T>& values);
 
-  MatrixType type() const { return m_type; }
+  virtual MatrixType type() const = 0;
+
+  AMatrix<T>& copy(const AMatrix<T>& other);
+  AMatrix<T>& swap(AMatrix<T>& other);
+  AMatrix<T>& move(AMatrix<T>&& other);
 
   virtual std::istream& input(std::istream& stream);
   virtual std::ostream& output(std::ostream& stream) const;
   virtual bool equalTo(const AMatrix<T>& other) const;
 
 protected:
-  MatrixType m_type;
   SizeType m_rows;
   SizeType m_cols;
 

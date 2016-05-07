@@ -9,17 +9,17 @@
 
 
 template<class T>
-Vector<T>::Vector(): m_size(0), m_capacity(0), m_data(new T[0])
+Vector<T>::Vector(): m_size(0), m_capacity(0), m_data(new T[0]() )
 {
 }
 
 template<class T>
-Vector<T>::Vector(const SizeType count): m_size(count), m_capacity(count),  m_data(new T[count])
+Vector<T>::Vector(const SizeType count): m_size(count), m_capacity(count),  m_data(new T[count]())
 {
 }
 
 template<class T>
-Vector<T>::Vector(const Vector<T>& other): m_size(other.m_size), m_capacity(other.m_capacity), m_data( new T[m_capacity] )
+Vector<T>::Vector(const Vector<T>& other): m_size(other.m_size), m_capacity(other.m_capacity), m_data( new T[m_capacity]() )
 {
   assert(m_capacity >= m_size);
 
@@ -37,7 +37,7 @@ Vector<T>::Vector(Vector<T>&& other): m_size(other.m_size), m_capacity(other.m_c
 }
 
 template<class T>
-Vector<T>::Vector(const std::initializer_list<T>& l): m_size(l.size()), m_capacity(l.size()), m_data(new T[m_capacity])
+Vector<T>::Vector(const std::initializer_list<T>& l): m_size(l.size()), m_capacity(l.size()), m_data(new T[m_capacity]() )
 {
   std::copy(l.begin(), l.end(), m_data.get());
 }
@@ -56,7 +56,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& rhs)
   {
     m_size = rhs.m_size;
     m_capacity = rhs.m_capacity;
-    m_data.reset( new T[m_capacity] );
+    m_data.reset( new T[m_capacity]() );
     std::copy(rhs.m_data.get(), rhs.m_data.get()+m_size, m_data.get());
   }
   return *this;
@@ -175,7 +175,7 @@ void Vector<T>::reserve(const SizeType capacity)
 {
   assert(m_capacity >= m_size);
 
-  std::unique_ptr<T[]> tmp( new T[capacity] );
+  std::unique_ptr<T[]> tmp( new T[capacity]() );
   m_size = std::min(m_size, capacity);
   //Copy data
   for(SizeType i = 0; i < m_size; i++)
@@ -204,7 +204,7 @@ void Vector<T>::clear()
 {
   m_size = 0;
   m_capacity = 0;
-  m_data.reset( new T[0] );
+  m_data.reset( new T[0]() );
 }
 
 template<class T>
@@ -285,14 +285,46 @@ void Vector<T>::resize(const SizeType size)
 }
 
 template<class T>
-void Vector<T>::swap(Vector<T>& other)
+Vector<T>& Vector<T>::swap(Vector<T>& other)
 {
   assert(m_capacity >= m_size);
   assert(other.m_capacity >= other.m_size);
 
-  std::swap(m_size, other.m_size);
-  std::swap(m_capacity, other.m_size);
-  std::swap(m_data, other.m_data);
+  using std::swap;
+  swap(m_size, other.m_size);
+  swap(m_capacity, other.m_size);
+  swap(m_data, other.m_data);
+
+  return *this;
+}
+
+template<class T>
+Vector<T>& Vector<T>::copy(const Vector<T>& other)
+{
+  assert(m_capacity >= m_size);
+  assert(other.m_capacity >= other.m_size);
+
+  m_size = other.m_size;
+  m_capacity = other.m_capacity;
+
+  m_data.reset( new T[m_capacity]() );
+  for(SizeType i = 0; i < m_size; i++)
+  {
+    m_data[i] = other.m_data[i];
+  }
+  return *this;
+}
+
+template<class T>
+Vector<T>& Vector<T>::move(Vector<T>&& other)
+{
+  assert(m_capacity >= m_size);
+  assert(other.m_capacity >= other.m_size);
+
+  m_size = other.m_size;
+  m_capacity = m_capacity;
+  m_data = std::move(other.m_data);
+  return *this;
 }
 
 template<class T>
@@ -359,7 +391,7 @@ std::ostream& Vector<T>::output(std::ostream& stream) const
 {
   for(SizeType i = 0; i < m_size; i++)
   {
-    stream << std::setw(16) << std::setprecision(8) << std::fixed << m_data[i];
+    stream << std::setw(6) << std::setprecision(3) << std::fixed << m_data[i] << " ";
   }
   return stream;
 }

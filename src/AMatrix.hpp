@@ -7,36 +7,48 @@
 #include "Utils.h"
 
 template<class T>
-AMatrix<T>::AMatrix(const MatrixType& type, const SizeType rows, const SizeType cols): m_type(type), m_rows(rows), m_cols(cols)
+AMatrix<T>::AMatrix(const SizeType rows, const SizeType cols): m_rows(rows), m_cols(cols)
 {
 }
 
 template<class T>
-AMatrix<T>::AMatrix(const AMatrix<T>& other):  m_type(other.m_type), m_rows(other.m_rows), m_cols(other.m_cols)
+AMatrix<T>::AMatrix(const AMatrix<T>& other): m_rows(other.m_rows), m_cols(other.m_cols)
 {
 }
 
 template<class T>
-AMatrix<T>::AMatrix(AMatrix<T>&& other): m_type(other.m_type), m_rows(other.m_rows), m_cols(other.m_cols)
+AMatrix<T>::AMatrix(AMatrix<T>&& other): m_rows(other.m_rows), m_cols(other.m_cols)
 {
 
 }
 
 template<class T>
-AMatrix<T>::~AMatrix()
+AMatrix<T>& AMatrix<T>::copy(const AMatrix<T>& other)
 {
+  m_rows = other.m_rows;
+  m_cols = other.m_cols;
+  return *this;
+}
+
+template<class T>
+AMatrix<T>& AMatrix<T>::swap(AMatrix<T>& other)
+{
+  using std::swap;
+  swap(m_rows, other.m_rows);
+  swap(m_cols, other.m_cols);
+  return *this;
 }
 
 template<class T>
 Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getRow(const SizeType row) const
 {
-  if(row >= m_rows)
+  if(row >= this->rows())
   {
     throw std::out_of_range( GEN_EXCEPT("Given row out of range") );
   }
 
-  Vector<ValueType> tmp(m_cols);
-  for(SizeType i = 0; i < m_cols; i++)
+  Vector<ValueType> tmp(this->cols());
+  for(SizeType i = 0; i < this->cols(); i++)
   {
     tmp[i] = this->get(row, i);
   }
@@ -46,13 +58,13 @@ Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getRow(const SizeType row) co
 template<class T>
 Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getCol(const SizeType col) const
 {
-  if(col >= m_cols)
+  if(col >= this->cols())
   {
     throw std::out_of_range( GEN_EXCEPT("Given column out of range") );
   }
 
-  Vector<ValueType> tmp(m_rows);
-  for(SizeType i = 0; i < m_rows; i++)
+  Vector<ValueType> tmp(this->rows());
+  for(SizeType i = 0; i < this->rows(); i++)
   {
     tmp[i] = this->get(i, col);
   }
@@ -62,16 +74,16 @@ Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getCol(const SizeType col) co
 template<class T>
 void AMatrix<T>::setRow(const SizeType row, const Vector< typename AMatrix<T>::ValueType >& values)
 {
-  if(row >= m_rows)
+  if(row >= this->rows())
   {
     throw std::out_of_range( GEN_EXCEPT("Given row out of range") );
   }
-  if(values.size() != m_cols)
+  if(values.size() != this->cols())
   {
     throw std::out_of_range( GEN_EXCEPT("Given values length out of range") );
   }
 
-  for(SizeType i = 0; i < m_cols; i++)
+  for(SizeType i = 0; i < this->cols(); i++)
   {
     this->set(row, i, values[i]);
   }
@@ -80,16 +92,16 @@ void AMatrix<T>::setRow(const SizeType row, const Vector< typename AMatrix<T>::V
 template<class T>
 void AMatrix<T>::setCol(const SizeType col, const Vector<T>& values)
 {
-  if(col >= m_cols)
+  if(col >= this->cols())
   {
     throw std::out_of_range( GEN_EXCEPT("Given column out of range") );
   }
-  if(values.size() != m_rows)
+  if(values.size() != this->rows())
   {
     throw std::out_of_range( GEN_EXCEPT("Given values length out of range") );
   }
 
-  for(SizeType i = 0; i < m_rows; i++)
+  for(SizeType i = 0; i < this->rows(); i++)
   {
     this->set(i, col, values[i]);
   }
@@ -98,9 +110,9 @@ void AMatrix<T>::setCol(const SizeType col, const Vector<T>& values)
 template<class T>
 std::istream& AMatrix<T>::input(std::istream& stream)
 {
-  for(SizeType i = 0; i < m_rows; i++)
+  for(SizeType i = 0; i < this->rows(); i++)
   {
-    for(SizeType j = 0; j < m_cols; j++)
+    for(SizeType j = 0; j < this->cols(); j++)
     {
       ValueType tmp;
       stream >> tmp;
@@ -113,11 +125,11 @@ std::istream& AMatrix<T>::input(std::istream& stream)
 template<class T>
 std::ostream& AMatrix<T>::output(std::ostream& stream) const
 {
-  for(SizeType i = 0; i < m_rows; i++)
+  for(SizeType i = 0; i < this->rows(); i++)
   {
-    for(SizeType j = 0; j < m_cols; j++)
+    for(SizeType j = 0; j < this->cols(); j++)
     {
-      stream << this->get(i, j) << " ";
+      stream << std::setw(6) << this->get(i, j) << " ";
     }
     stream << std::endl;
   }
@@ -127,14 +139,14 @@ std::ostream& AMatrix<T>::output(std::ostream& stream) const
 template<class T>
 bool AMatrix<T>::equalTo(const AMatrix<T>& other) const
 {
-  if(m_rows != other.m_rows || m_cols != other.m_cols)
+  if(this->rows() != other.rows() || this->cols() != other.cols())
   {
     return false;
   }
 
-  for(SizeType i = 0; i < m_rows; i++)
+  for(SizeType i = 0; i < this->rows(); i++)
   {
-    for(SizeType j = 0; j < m_cols; j++)
+    for(SizeType j = 0; j < this->cols(); j++)
     {
       if(this->get(i, j) != other.get(i, j))
       {

@@ -13,14 +13,14 @@ void test_Vector()
 {
   BEGIN_TESTS("Vector");
 
-  BEGIN_TEST("Vector::Vector()");
+  BEGIN_TEST("Vector()");
     Vector<int> v;
     VERIFY_EQ(v.size(), 0);
     VERIFY_EQ(v.capacity(), 0);
   END_TEST;
 
 
-  BEGIN_TEST("Vector::Vector(const int)");
+  BEGIN_TEST("Vector(const int)");
     Vector<int> v(0);
     VERIFY_EQ(v.size(), 0);
     VERIFY_EQ(v.capacity(), 0);
@@ -28,6 +28,12 @@ void test_Vector()
     Vector<int> v1(5);
     VERIFY_EQ(v1.size(), 5);
     VERIFY_EQ(v1.capacity(), 5);
+
+    for(Vector<int>::SizeType i = 0; i < v1.size(); i++)
+    {
+        VERIFY_EQ(v1[i], 0);
+    }
+
   END_TEST;
 
   BEGIN_TEST("Vector::operator[](const int)");
@@ -331,6 +337,41 @@ void test_Vector()
     VERIFY_EQ(v1.capacity(), 3);
   END_TEST;
 
+  BEGIN_TEST("Vector::operator+=(Vector)");
+  BEGIN_TEST("operator+(Vector, Vector)");
+    Vector<int> v1 = {1, 2, 3};
+    Vector<int> v2 = {5, 6, 7};
+
+    VERIFY_EQ(v1 + v2, Vector<int>({6, 8, 10}));
+    VERIFY_EQ(v2 + v1, Vector<int>({6, 8, 10}));
+    VERIFY_EQ(v1, Vector<int>({1, 2, 3}));
+    VERIFY_EQ(v2, Vector<int>({5, 6, 7}));
+
+    VERIFY_EQ(v1 += v2, Vector<int>({6, 8, 10}));
+    VERIFY_EQ(v1, Vector<int>({6, 8, 10}));
+    VERIFY_EQ(v2, Vector<int>({5, 6, 7}));
+  END_TEST;
+  END_TEST;
+
+  BEGIN_TEST("Vector::operator*=(T)");
+  BEGIN_TEST("operator*(T, Vector)");
+  BEGIN_TEST("operator*(Vector, T)");
+    Vector<int> v = {1, 2, 3};
+
+    VERIFY_EQ(v *= 3, Vector<int>({3, 6, 9}));
+    VERIFY_EQ(v, Vector<int>({3, 6, 9}));
+
+    VERIFY_EQ(v *= -1, Vector<int>({-3, -6, -9}));
+    VERIFY_EQ(v, Vector<int>({-3, -6, -9}));
+
+    VERIFY_EQ(v * -1, Vector<int>({3, 6, 9}));
+    VERIFY_EQ(v, Vector<int>({-3, -6, -9}));
+
+    VERIFY_EQ(-1 * v, Vector<int>({3, 6, 9}));
+    VERIFY_EQ(v, Vector<int>({-3, -6, -9}));
+  END_TEST;
+  END_TEST;
+  END_TEST;
 
   END_TESTS;
 }

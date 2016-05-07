@@ -4,12 +4,11 @@
 /// @brief  Unit tests for Vector<T>
 //////////////////////////////////////////////////////////////////////
 
-#include "Utils.h"
-
 #ifndef TEST_DENSEMATRIX_H
 #define TEST_DENSEMATRIX_H
 
 #include "DenseMatrix.h"
+#include "MatrixType.h"
 
 void test_DenseMatrix()
 {
@@ -19,6 +18,7 @@ void test_DenseMatrix()
     DenseMatrix<int> m(3, 4);
     VERIFY_EQ(m.rows(), 3);
     VERIFY_EQ(m.cols(), 4);
+    VERIFY_EQ(m.type(), MatrixType::DENSE);
   END_TEST;
 
   BEGIN_TEST("DenseMatrix::get(SizeType, SizeType)");
@@ -26,6 +26,14 @@ void test_DenseMatrix()
     DenseMatrix<int> m(3, 4);
     VERIFY_EQ(m.rows(), 3);
     VERIFY_EQ(m.cols(), 4);
+
+    for(int i = 0; i < m.rows(); i++)
+    {
+      for(int j = 0; j < m.cols(); j++)
+      {
+        VERIFY_EQ(m.get(i, j), 0);
+      }
+    }
 
     m.set(0, 0, 1); m.set(0, 1, 2); m.set(0, 2, 3); m.set(0, 3, 4);
     m.set(1, 0, 5); m.set(1, 1, 6); m.set(1, 2, 7); m.set(1, 3, 8);
