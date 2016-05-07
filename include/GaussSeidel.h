@@ -1,5 +1,8 @@
-// Russley...comment this
-// TODO: Comments!
+//////////////////////////////////////////////////////////////////////
+/// @file header.h
+/// @author Your name and class section here
+/// @brief A brief description of the file
+////////////////////////////////////////////////////////////////////// 
 
 #ifndef GAUSS_SEIDEL_SOLVER_H
 #define GAUSS_SEIDEL_SOLVER_H
@@ -9,6 +12,10 @@
 #include "LpNorm.h"
 #include "Vector.h"
 
+//////////////////////////////////////////////////////////////////////
+/// @class GaussSeidel
+/// @brief Functor solver implementing GaussSeidel
+//////////////////////////////////////////////////////////////////////
 template<class T>
 class GaussSeidel: public ALinSysSolver<T, BandedMatrix<T> >
 {
