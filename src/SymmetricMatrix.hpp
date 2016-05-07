@@ -41,7 +41,7 @@ SymmetricMatrix<T>& SymmetricMatrix<T>::operator=(SymmetricMatrix<T>&& other)
 {
   if(this != &other)
   {
-    move(other);
+    move(std::move(other));
   }
   return *this;
 }
@@ -90,7 +90,7 @@ SymmetricMatrix<T>& SymmetricMatrix<T>::move(SymmetricMatrix<T>&& other)
 {
   using std::move;
   m_data = std::move(other.m_data);
-  AMatrix<T>::move(other);
+  AMatrix<T>::move(std::move(other));
   return *this;
 }
 

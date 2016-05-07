@@ -37,7 +37,7 @@ UpperTriMatrix<T>& UpperTriMatrix<T>::operator=(UpperTriMatrix<T>&& other)
 {
   if(this != &other)
   {
-    move(other);
+    move(std::move(other));
   }
   return *this;
 }

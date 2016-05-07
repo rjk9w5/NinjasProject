@@ -38,7 +38,7 @@ TridiagMatrix<T>& TridiagMatrix<T>::operator=(TridiagMatrix<T>&& other)
 {
   if(this != &other)
   {
-    move(other);
+    move(std::move(other));
   }
   return *this;
 }
