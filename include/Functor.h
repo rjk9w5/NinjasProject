@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////
+/// @file   Functor.h
+/// @author Ryan Krattiger
+/// @brief  A functor class that holds a function with two inputs and 
+///         one output.
+//////////////////////////////////////////////////////////////////////
+
 #ifndef ABSTRACT_FUNCTOR_XY_H
 #define ABSTRACT_FUNCTOR_XY_H
 

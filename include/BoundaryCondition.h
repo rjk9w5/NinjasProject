@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////
+/// @file   BoundaryCondition.h
+/// @author Ryan Krattiger
+/// @brief  Abstract class object for holding the information about
+///         boundaries.
+//////////////////////////////////////////////////////////////////////
+
 #ifndef ABSTRACT_BOUNDARY_CONDITION_H_
 #define ABSTRACT_BOUNDARY_CONDITION_H_
 
@@ -7,6 +14,8 @@ template <class T>
 class ABoundaryCondition
 {
   public: 
+    typedef T ValueType;
+    
     virtual T upper(const T&) = 0;
     virtual T lower(const T&) = 0;
 

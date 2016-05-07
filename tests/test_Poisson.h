@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
-/// @file   test_Vector.h
-/// @author Russley Shaw
-/// @brief  Unit tests for Vector<T>
+/// @file   test_Poisson.h
+/// @author Ryan Krattiger
+/// @brief  Unit tests for Poisson<T>
 //////////////////////////////////////////////////////////////////////
 
 #ifndef TEST_POISSON_H
@@ -17,56 +17,56 @@
 // Information Provided for the Boundary Conditions were Y is constant and X
 //   is constant respectively...
 
-class Forcing: AFucntorxy<double>
+class Forcing: public AFunctorxy<double>
 {
 public:
-  double operator()(const double& x, const double& y)
+  virtual double operator()(const double& x, const double& y)
   {
     return -2*(x*x + y*y);
   }
 };
 
-class ConstY: ABoundaryCondition<double>
+class ConstY: public ABoundaryCondition<double>
 {
-  double upper(const double x)
+  virtual double upper(const double &x)
   {
     return 1 - x*x;
   }
 
-  double lower(const double x)
+  virtual double lower(const double &x)
   {
     return 2*(1 - x*x);
   }
 
-  double upper_bound()
+  virtual double upper_bound()
   {
     return 1;
   }
 
-  double lower_bound()
+  virtual double lower_bound()
   {
     return 0;
   }
 };
 
-class ConstX: ABoundaryCondition<double>
+class ConstX: public ABoundaryCondition<double>
 {
-  double upper(const double y)
+  virtual double upper(const double &y)
   {
     return 0;
   }
 
-  double lower(const double y)
+  virtual double lower(const double &y)
   {
     return 1 + y*y;
   }
 
-  double upper_bound()
+  virtual double upper_bound()
   {
     return 1;
   }
 
-  double lower_bound()
+  virtual double lower_bound()
   {
     return 0;
   }
@@ -75,12 +75,18 @@ class ConstX: ABoundaryCondition<double>
 void test_Poisson()
 {
   int N = 10;
-  Poisson<double> P(Forcing& F, ConstX& bc1, ConstY& bc2);
-  DenseMatrix<double> exact(N,N), numeric;
+  Forcing f; 
+  ConstX bc1;
+  ConstY bc2;
+  Poisson<double> P(f, bc1, bc2);
+  DenseMatrix<double> exact(N,N), numeric(0,0);
 
-  numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
+  // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
+  numeric = P.solve(N);
 
   // std::cout << numeric << '\n';
 
   return;
 }
+
+#endif
