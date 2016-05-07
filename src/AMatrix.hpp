@@ -173,3 +173,16 @@ bool AMatrix<T>::isEqual(const AMatrix<T>& other) const
   }
   return true;
 }
+
+template <class T>
+Vector<T> operator*(const AMatrix<T>& lhs, const Vector<T>& rhs)
+{
+  assert(lhs.cols() == rhs.size());
+  Vector<T> ret(lhs.rows());
+  for(int i=0; i<lhs.rows(); ++i)
+  {
+    ret[i] = lhs.getRow(i)*rhs;
+  }
+
+  return ret;
+}

@@ -11,113 +11,92 @@
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
-/// @fn int AMatrix<T>::rows() const;
-/// @brief Gets the number of rows in the matrix
-/// @return Number of rows
+/// @fn LowerTriMatrix<T>::LowerTriMatrix(const LowerTriMatrix<T>&)
+/// @brief Copy constructor - copies src to new LowerTriMatrix
+/// @post The matrix is initialized with a copy of src's data
+/// @param src LowerTriMatrix to copy from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn int AMatrix<T>::cols() const;
-/// @brief Gets the number of cols in the matrix
-/// @return Number of columns
+/// @fn LowerTriMatrix<T>::LowerTriMatrix(LowerTriMatrix<T>&&)
+/// @brief Move constructor - moves data from src to new LowerTriMatrix
+/// @post Old object is emptied and new object has contents of old
+/// @param src LowerTriMatrix to move from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn T AMatrix<T>::get(const int row, const int col) const
-/// @brief Gets element at row & colummn
+/// @fn LowerTriMatrix<T>::LowerTriMatrix(const int)
+/// @brief Rectangular Constructor - constructs a rectangular LowerTriMatrix
+/// @post Constructs a LowerTriMatrix with m rows and n columns
+/// @post Throws std::out_of_range if m or n are less than 0
+/// @param size Number of rows & columns
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn LowerTriMatrix<T>::~LowerTriMatrix()
+/// @brief Destructor - deallocates internal data
+/// @post The object is ready to be destroyed
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn LowerTriMatrix<T>::operator=(const LowerTriMatrix<T>&)
+/// @brief Copy assignment - copies src to this object
+/// @post This LowerTriMatrix is a copy of src
+/// @param src LowerTriMatrix to copy from
+/// @return This object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn LowerTriMatrix<T>::operator=(LowerTriMatrix<T>&&)
+/// @brief Move assignment - moves from src to this object
+/// @post This object has the old contents of src and src is empty
+/// @param src LowerTriMatrix to move from
+/// @param paramName2 description of the parameter
+/// @return This object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn LowerTriMatrix<T>::get(const int, const int)
+/// @brief Item introspection - access matrix element at given row & column
+/// @post Throws std::out_of_range if row or col are out of bounds of matrix dimensions
+/// @param row Row index to access
+/// @param col Column index to access
+/// @return Copy of data at given row and column
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn LowerTriMatrix<T>::set(const int, const int, const T&)
+/// @brief Item modification - modify matrix element at given row & column
+/// @pre Copy assignment should be defined for T
+/// @post The value at the row & column is updated with values
+/// @post Throws std::out_of_range if row or col are out of matrix bounds
 /// @param row Row index
 /// @param col Column index
-/// @return Value of item at row & column
+/// @param value Value to copy to row & column
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn T AMatrix<T>::getRows(const int row) const
-/// @brief Gets elements at row
-/// @param row Row index
-/// @return Values of item at column
+/// @fn copy(const LowerTriMatrix<T>&)
+/// @brief copies from other to CO
+/// @post CO is now a copy of other
+/// @param other Matrix to copy from
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn T AMatrix<T>::getCols(const int col) const
-/// @brief Gets elements at column
-/// @param col Column index
-/// @return Values of item at column
+/// @fn swap(LowerTriMatrix<T>&)
+/// @brief swaps CO with other
+/// @post CO and other are swapped
+/// @param other Matrix to swap with
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn T AMatrix<T>::set(const int row, const int col, const T& value) const
-/// @brief Sets element at row & colummn with value
-/// @post Item at row & column is updated
-/// @param row Row index
-/// @param col Column index
-/// @param value Value to set at row & column
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn  AMatrix<T>::setRows(const int row, const Vector<T>&)
-/// @brief Sets elements at row with given vector
-/// @param row Row index
-/// @return Values of item at column
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn void AMatrix<T>::setCols(const int col const Vector<T>&)
-/// @brief Gets elements at column
-/// @param col Column index
-/// @return Values of item at column
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn MatrixType AMatrix<T>::type() const;
-/// @brief Gets type specified by enumeration
-/// @return Enumeration of type
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::istream& AMatrix<T>::input(std::istream& stream);
-/// @brief retrieves matrix from virtual interface.
-/// @pre size must be set before inserting data from stream
-/// @post Updates matrix with correct data
-/// @return updated input stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::ostream& AMatrix<T>::output(std::ostream& stream);
-/// @brief outputs matrix from virtual interface to stream.
-/// @pre operator<<(ostream, T) must be defined
-/// @post Updates matrix with correct data
-/// @return updated input stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn bool AMatrix<T>::isEqual(const AMatrix<T>& other) const;
-/// @brief provides interface for equating equality
-/// @pre operator==(T, T) must be defined
-/// @return whether matricies are equivalent or not
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::istream& operator>>(std::istream& lhs, AMatrix<T>& rhs)
-/// @brief Implements generalized virtual extraction operator
-/// @param lhs input stream
-/// @param rhs Matrix to input into
-/// @return Updated input stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn std::ostream& operator>>(std::ostream& lhs, AMatrix<T>& rhs)
-/// @brief Implements generalized virtual insertion operator
-/// @param lhs output stream
-/// @param rhs Matrix to output into
-/// @return Updated output stream
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-/// @fn operator*(const AMatrix<T>&, const Vector<T>&);
-/// @brief Matrix & Vector multiplication
-/// @param lhs Matrix to multiply
-/// @param rhs Vector to multiply with
-/// @return Vector<T> - Vector of product of Matrix * Vector
+/// @fn move(LowerTriMatrix<T>&&)
+/// @brief move other to CO
+/// @post other becomes unusable, CO becomes other
+/// @param other Matrix to move
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////

@@ -11,64 +11,92 @@
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymmetricMatrix(const int);
-/// @brief M x M constructor
-/// @pre See SymmetricMatrix<T>(const int)
-/// @post Constructs Upper triangular matrix with M x M size
-/// @param m Size to allocate for Matrix
+/// @fn SymmetricMatrix<T>::SymmetricMatrix(const SymmetricMatrix<T>&)
+/// @brief Copy constructor - copies src to new SymmetricMatrix
+/// @post The matrix is initialized with a copy of src's data
+/// @param src SymmetricMatrix to copy from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymmetricMatrix(const SymmetricMatrix<T>&);
-/// @brief Copy constructor
-/// @pre See SymmetricMatrix<T>(const SymmetricMatrix<T>&)
-/// @post Constructs copied object
-/// @param other Object to be copied
+/// @fn SymmetricMatrix<T>::SymmetricMatrix(SymmetricMatrix<T>&&)
+/// @brief Move constructor - moves data from src to new SymmetricMatrix
+/// @post Old object is emptied and new object has contents of old
+/// @param src SymmetricMatrix to move from
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymmetricMatrix(SymmetricMatrix<T>&&);
-/// @brief Move constructor
-/// @pre See SymmetricMatrix<T>(SymmetricMatrix<T>&&)
-/// @post Moves to copied object
-/// @param other Object to be moved
+/// @fn SymmetricMatrix<T>::SymmetricMatrix(const int)
+/// @brief Rectangular Constructor - constructs a rectangular SymmetricMatrix
+/// @post Constructs a SymmetricMatrix with m rows and n columns
+/// @post Throws std::out_of_range if m or n are less than 0
+/// @param size Number of rows & columns
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& rhs);
-/// @brief Copy assignment
-/// @pre See SymmetricMatrix::operator=(const SymmetricMatrix<T>&);
-/// @post Copies data from rhs to calling object
-/// @param rhs Right hand side object
-/// @return Calling Object
+/// @fn SymmetricMatrix<T>::~SymmetricMatrix()
+/// @brief Destructor - deallocates internal data
+/// @post The object is ready to be destroyed
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& rhs);
-/// @brief Copy assignment
-/// @pre See SymmetricMatrix::operator=(const SymmetricMatrix<T>&);
-/// @post Copies data from rhs to calling object
-/// @param rhs Right hand side object
-/// @return Calling Object
+/// @fn SymmetricMatrix<T>::operator=(const SymmetricMatrix<T>&)
+/// @brief Copy assignment - copies src to this object
+/// @post This SymmetricMatrix is a copy of src
+/// @param src SymmetricMatrix to copy from
+/// @return This object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn void set(const int m, const int n, const T& value);
-/// @brief Mutator for individual elements
-/// @pre Assignment must be defined on type T
-/// @post The set value is updated
-/// @param m row to set
-/// @param n col to set
-/// @param value Item value to set at m, n
+/// @fn SymmetricMatrix<T>::operator=(SymmetricMatrix<T>&&)
+/// @brief Move assignment - moves from src to this object
+/// @post This object has the old contents of src and src is empty
+/// @param src SymmetricMatrix to move from
+/// @param paramName2 description of the parameter
+/// @return This object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-/// @fn void get(const int m, const int n);
-/// @brief Accessor for individual elements
-/// @pre Assignment must be defined on type T
-/// @param m row to get
-/// @param n col to get
-/// @return Item at m, n
+/// @fn SymmetricMatrix<T>::get(const int, const int)
+/// @brief Item introspection - access matrix element at given row & column
+/// @post Throws std::out_of_range if row or col are out of bounds of matrix dimensions
+/// @param row Row index to access
+/// @param col Column index to access
+/// @return Copy of data at given row and column
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn SymmetricMatrix<T>::set(const int, const int, const T&)
+/// @brief Item modification - modify matrix element at given row & column
+/// @pre Copy assignment should be defined for T
+/// @post The value at the row & column is updated with values
+/// @post Throws std::out_of_range if row or col are out of matrix bounds
+/// @param row Row index
+/// @param col Column index
+/// @param value Value to copy to row & column
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn copy(const SymmetricMatrix<T>&)
+/// @brief copies from other to CO
+/// @post CO is now a copy of other
+/// @param other Matrix to copy from
+/// @return updated calling object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn swap(SymmetricMatrix<T>&)
+/// @brief swaps CO with other
+/// @post CO and other are swapped
+/// @param other Matrix to swap with
+/// @return updated calling object
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+/// @fn move(SymmetricMatrix<T>&&)
+/// @brief move other to CO
+/// @post other becomes unusable, CO becomes other
+/// @param other Matrix to move
+/// @return updated calling object
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
