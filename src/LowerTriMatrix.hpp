@@ -5,75 +5,77 @@
 //////////////////////////////////////////////////////////////////////
 
 template<class T>
-LowerTriMatrix<T>::LowerTriMatrix(const int m): SymDenseMatrix<T>(m)
-{
-  this->m_type = MatrixType::LOWERTRI;
-}
-
-template<class T>
-LowerTriMatrix<T>::LowerTriMatrix(const LowerTriMatrix<T>& other): SymDenseMatrix<T>(other)
-{
-  this->m_type = MatrixType::LOWERTRI;
-}
-
-template<class T>
-LowerTriMatrix<T>::LowerTriMatrix(LowerTriMatrix<T>&& other): SymDenseMatrix<T>(other)
-{
-  this->m_type = MatrixType::LOWERTRI;
-}
-
-template<class T>
-LowerTriMatrix<T>::~LowerTriMatrix()
+LowerTriMatrix<T>::LowerTriMatrix(const SizeType size):
+  SymmetricMatrix<T>(size);
 {
 }
 
 template<class T>
-LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(const LowerTriMatrix<T>& rhs)
+LowerTriMatrix<T>::LowerTriMatrix(const LowerTriMatrix<T>& other):
+  SymmetricMatrix<T>(other)
 {
-  if(this != &rhs)
+}
+
+template<class T>
+LowerTriMatrix<T>::LowerTriMatrix(LowerTriMatrix<T>&& other):
+  SymmetricMatrix<T>(other)
+{
+}
+
+template<class T>
+LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(const UpperTriMatrix<T>& other)
+{
+  if(this != &other)
   {
-    this->m_type = rhs.m_type;
-    this->m_rows = rhs.m_rows;
-    this->m_cols = rhs.m_cols;
-    this->m_data = rhs.m_data;
+    copy(other);
   }
   return *this;
 }
 
 template<class T>
-LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(LowerTriMatrix<T>&& rhs)
+LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(LowerTriMatrix<T>&& other)
 {
-  if(this != &rhs)
+  if(this != &other)
   {
-    this->m_type = rhs.m_type;
-    this->m_rows = rhs.m_rows;
-    this->m_cols = rhs.m_cols;
-    this->m_data = std::move(rhs.m_data);
+    move(other);
   }
   return *this;
 }
 
 template<class T>
-void LowerTriMatrix<T>::set(const int m, const int n, const T& value)
+typename LowerTriMatrix<T>::ValueType LowerTriMatrix<T>::get(const SizeType row, const SizeType col) const
 {
-  if(m < n)
+  if(row >= this->rows() || col >= this->cols())
   {
-    throw std::domain_error("void LowerTriMatrix<T>::set(const int, const int, const T&) - Cannot set in upper triangle");
+    throw std::out_of_range( GEN_EXCEPT( "Given row,col should be within matrix's row,col" ) );
+  }
+  else if(col <= row)
+  {
+    return SymmetricMatrix<T>::get(row, col);
   }
   else
   {
-    SymDenseMatrix<T>::set(m, n, value);
-  }
-}
-
-template<class T>
-T LowerTriMatrix<T>::get(const int m, const int n) const
-{
-  if(m > n) {
     return 0;
   }
+}
+
+template<class T>
+void LowerTriMatrix<T>::set(const SizeType row, const SizeType col, ConstReferenceType value)
+{
+  if(row >= this->rows() || col >= this->cols())
+  {
+    throw std::out_of_range( GEN_EXCEPT( "Given row,col should be within matrix's row,col" ) );
+  }
+  else if(col <= row)
+  {
+    return SymmetricMatrix<T>::set(row, col, value);
+  }
+  else if(value == 0)
+  {
+    //Do nothing
+  }
   else
   {
-    return SymDenseMatrix<T>::get(m, n);
+    throw std::domain_error( GEN_EXCEPT("Cannot edit values in upper half of lower triangular") );
   }
 }

@@ -49,7 +49,7 @@ DenseMatrix<T>& DenseMatrix<T>::operator=(DenseMatrix<T>&& other)
 {
   if(this != &other)
   {
-    move(other);
+    move(std::move(other));
   }
   return *this;
 }
@@ -108,6 +108,7 @@ template<class T>
 DenseMatrix<T>& DenseMatrix<T>::copy(const DenseMatrix<T>& other)
 {
   m_data = other.m_data;
+
   AMatrix<T>::copy(other);
   return *this;
 }
@@ -117,6 +118,7 @@ DenseMatrix<T>& DenseMatrix<T>::swap(DenseMatrix<T>& other)
 {
   using std::swap;
   swap(m_data, other.m_data);
+
   AMatrix<T>::swap(other);
   return *this;
 }
@@ -124,8 +126,8 @@ DenseMatrix<T>& DenseMatrix<T>::swap(DenseMatrix<T>& other)
 template<class T>
 DenseMatrix<T>& DenseMatrix<T>::move(DenseMatrix<T>&& other)
 {
-  using std::move;
-  move(m_data, other.m_data);
-  AMatrix<T>::move(other);
+  m_data = std::move(other.m_data);
+
+  AMatrix<T>::move(std::move(other));
   return *this;
 }

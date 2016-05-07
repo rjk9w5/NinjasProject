@@ -28,6 +28,7 @@ public:
 
 class ConstY: public ABoundaryCondition<double>
 {
+public:
   virtual double upper(const double &x)
   {
     return 1 - x*x;
@@ -51,6 +52,7 @@ class ConstY: public ABoundaryCondition<double>
 
 class ConstX: public ABoundaryCondition<double>
 {
+public:
   virtual double upper(const double &y)
   {
     return 0;
@@ -75,10 +77,7 @@ class ConstX: public ABoundaryCondition<double>
 void test_Poisson()
 {
   int N = 10;
-  Forcing f; 
-  ConstX bc1;
-  ConstY bc2;
-  Poisson<double> P(f, bc1, bc2);
+  Poisson<double, ConstX, ConstY, Forcing> P;
   DenseMatrix<double> exact(N,N), numeric(0,0);
 
   // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);

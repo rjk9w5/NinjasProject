@@ -156,7 +156,7 @@ public:
 
   virtual std::istream& input(std::istream& stream);
   virtual std::ostream& output(std::ostream& stream) const;
-  virtual bool equalTo(const AMatrix<T>& other) const;
+  virtual bool isEqual(const AMatrix<T>& other) const;
 
 protected:
   SizeType m_rows;

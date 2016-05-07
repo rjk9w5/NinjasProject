@@ -40,6 +40,15 @@ AMatrix<T>& AMatrix<T>::swap(AMatrix<T>& other)
 }
 
 template<class T>
+AMatrix<T>& AMatrix<T>::move(AMatrix<T>&& other)
+{
+  m_rows = other.m_rows;
+  m_cols = other.m_cols;
+  return *this;
+}
+
+
+template<class T>
 Vector<typename AMatrix<T>::ValueType> AMatrix<T>::getRow(const SizeType row) const
 {
   if(row >= this->rows())
@@ -137,7 +146,7 @@ std::ostream& AMatrix<T>::output(std::ostream& stream) const
 }
 
 template<class T>
-bool AMatrix<T>::equalTo(const AMatrix<T>& other) const
+bool AMatrix<T>::isEqual(const AMatrix<T>& other) const
 {
   if(this->rows() != other.rows() || this->cols() != other.cols())
   {

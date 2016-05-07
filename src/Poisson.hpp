@@ -1,22 +1,13 @@
 
-template <class T>
-Poisson<T>::Poisson(
-  const AFunctorxy<T>& func, 
-  const ABoundaryCondition<T>& constX, 
-  const ABoundaryCondition<T>& constY): f(func), BC({constX, constY})
-{
-}
-
-
-template <class T>
+template <class T, class T_XBound, class T_YBound, class T_ForcingFunction>
 // DenseMatrix<T> Poisson<T, T_ForceFunction>::solve(const ALinSysSolver<T, BandedMatrix<T>>& solver, const size_t N)
-DenseMatrix<T> Poisson<T>::solve(const size_t N)
+DenseMatrix<T> Poisson<T, T_XBound, T_YBound, T_ForcingFunction>::solve(const size_t N)
 {
   SizeType n = N-2;
   DenseMatrix<T> solution(N,N);
   BandedMatrix<T> A(n*n, n*n, 2, 2);
-  Vector<T> b(n); 
-  ValueType h = fabs(static_cast<ValueType>(BC[0]->upper_bound() - BC[0]->lower_bound()))/N;
+  Vector<T> b(n);
+  ValueType h = fabs(static_cast<ValueType>(m_xBound.upper_bound() - m_xBound.lower_bound()))/N;
   ValueType x,y;
   // Note: For additional robustness, a step-size parameter may be considered
   //       for the constant Y, or variable x. Because of the symetric nature
@@ -24,26 +15,27 @@ DenseMatrix<T> Poisson<T>::solve(const size_t N)
 
   for(SizeType i=0; i < n; ++i)
   {
-    x = BC[0]->lower_bound() + h*(i+1);
+    x = m_xBound.lower_bound() + h*(i+1);
 
     for(SizeType j=0; j < n; ++j)
     {
-      y = BC[1]->lower_bound() + h*(j+1);
-      b[i*n + j] = h*h*f(x,y);
+      y = m_yBound.lower_bound() + h*(j+1);
+      b[i*n + j] = h*h*m_forcingFunc(x,y);
 
       if(i==0)
-        b[i*n + j] = b[i*n + j] - BC[0]->lower(y-h);
+        b[i*n + j] = b[i*n + j] - m_xBound.lower(y-h);
 
       if(i==n-1)
-        b[i*n + j] = b[i*n + j] - BC[0]->upper(y+h);
+        b[i*n + j] = b[i*n + j] - m_xBound.upper(y+h);
 
       if(j==0)
-        b[i*n + j] = b[i*n + j] - BC[1]->lower(x-h);
+        b[i*n + j] = b[i*n + j] - m_yBound.lower(x-h);
 
       if(j==n-1)
-        b[i*n + j] = b[i*n + j] - BC[1]->upper(x+h);
+        b[i*n + j] = b[i*n + j] - m_yBound.upper(x+h);
     }
   }
 
   std::cout << b << '\n';
+  return solution;
 }
