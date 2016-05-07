@@ -24,7 +24,7 @@
 CXX = clang++
 
 ### Flags
-CXXFLAGS = -g -Wall -Wextra -W -pedantic-errors -std=c++11 -O3
+CXXFLAGS = -p -g -pg -03 -Wall -Wextra -W -pedantic-errors -std=c++11
 
 ### Compiler includes
 CXX_INCLUDES = . include RLib
@@ -68,6 +68,9 @@ drive: $(DRIVER_EXE)
 
 test: $(TESTER_EXE)
 	./$(TESTER_EXE)
+
+cachegrind: $(TESTER_EXE)
+	valgrind --tool=callgrind $(TESTER_EXE)
 
 ### Main targets
 $(TESTER_EXE): $(TESTER_OBJECTS) $(TESTERS_H)
