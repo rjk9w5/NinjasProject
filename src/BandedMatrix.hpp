@@ -75,6 +75,7 @@ typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, con
 template<class T>
 typename Vector<BandedMatrix<T>::ValueType> BandedMatrix<T>::getRow(const SizeType row) const
 {
+  return AMatrix<T>::getRow(row);
 }
 
 template<class T>
