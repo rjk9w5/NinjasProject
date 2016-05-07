@@ -79,23 +79,28 @@ template<class T>
 class SymmetricMatrix: public AMatrix<T>
 {
 public:
-  using ValueType = typename AMatrix<T>::ValueType;
   using ReferenceType = typename AMatrix<T>::ReferenceType;
   using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
   using PointerType = typename AMatrix<T>::PointerType;
   using ConstPointerType = typename AMatrix<T>::ConstPointerType;
   using SizeType = typename AMatrix<T>::SizeType;
 
-  SymmetricMatrix(const int rowcols);
+  SymmetricMatrix(const SizeType size);
   SymmetricMatrix(const SymmetricMatrix<T>& other);
   SymmetricMatrix(SymmetricMatrix<T>&& other);
-  virtual ~SymmetricMatrix();
+  virtual ~SymmetricMatrix(){}
 
-  SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& rhs);
-  SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& rhs);
+  virtual MatrixType type() const { return MatrixType::SYMMETRIC; }
+
+  SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& other);
+  SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& other);
 
   virtual ValueType get(const SizeType row, const SizeType col) const;
-  virtual void set(const SizeType row, const SizeType col, const ValueType& value);
+  virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
+
+  Symmetric<T>& copy(const Symmetric<T>& other);
+  Symmetric<T>& swap(Symmetric<T>& other);
+  Symmetric<T>& move(Symmetric<T>&& other);
 protected:
   Vector<ValueType> m_data;
 };

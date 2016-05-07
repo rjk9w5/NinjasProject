@@ -1,46 +1,31 @@
 //////////////////////////////////////////////////////////////////////
-/// @file SymmetricMatrix.h
+/// @file SymmetricMatrix.hpp
 /// @author Russley Shaw
-/// @brief Symmetric Matric implementation
+/// @brief Implementation of Symmetric Matrix
 //////////////////////////////////////////////////////////////////////
 
 #include <cassert>
 
 template<class T>
-SymmetricMatrix<T>::SymmetricMatrix(const SizeType rowcols)
-  :AMatrix<T>(MatrixType::SYMMETRIC, rowcols, rowcols), m_data( (rowcols*(rowcols+1))/2 )
+SymmetricMatrix<T>::SymmetricMatrix(const SizeType size):
+  AMatrix<T>(size, size), m_data( size * (size+1) / 2 );
 {
+  assert(this->rows()*(this->rows()+1)/2 == m_data.size() );
+  assert(this->cols()*(this->cols()+1)/2 == m_data.size() );
 }
 
-template<class T>
-SymmetricMatrix<T>::SymmetricMatrix(const SymmetricMatrix<T>& other)
-  :AMatrix<T>(other), m_data(other.m_data)
-{
-}
+SymmetricMatrix(const SymmetricMatrix<T>& other);
+SymmetricMatrix(SymmetricMatrix<T>&& other);
+virtual ~SymmetricMatrix(){}
 
-template<class T>
-SymmetricMatrix<T>::SymmetricMatrix(SymmetricMatrix<T>&& other)
-  :AMatrix<T>(other), m_data(std::move(other.m_data))
-{
-}
+virtual MatrixType type() const { return MatrixType::SYMMETRIC; }
 
-template<class T>
-SymmetricMatrix<T>::~SymmetricMatrix()
-{
-}
+SymmetricMatrix<T>& operator=(const SymmetricMatrix<T>& other);
+SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& other);
 
-template<class T>
-SymmetricMatrix<T>& SymmetricMatrix::operator=(const SymmetricMatrix<T>& other)
-{
-  if(this != &other)
-  {
-    this->m_rows = other.m_rows;
-    this->m_cols = other.m_cols;
-    this->m_data = other.m_data;
-  }
-}
+virtual ValueType get(const SizeType row, const SizeType col) const;
+virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
-SymmetricMatrix<T>& operator=(SymmetricMatrix<T>&& rhs);
-
-virtual T get(const int m, const int n) const;
-virtual void set(const int m, const int n, const T& value);
+Symmetric<T>& copy(const Symmetric<T>& other);
+Symmetric<T>& swap(Symmetric<T>& other);
+Symmetric<T>& move(Symmetric<T>&& other);
