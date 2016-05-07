@@ -22,22 +22,37 @@ void test_DenseMatrix()
   END_TEST;
 
   BEGIN_TEST("DenseMatrix::operator=(DenseMatrix)");
-  DenseMatrix<int> m1(3, 3, {
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9
-  });
+    DenseMatrix<int> m1(3, 3, {
+      1, 2, 3,
+      4, 5, 6,
+      7, 8, 9
+    });
 
-  DenseMatrix<int> m2(3, 5, {
-    1, 2, 3, 1, 2,
-    4, 5, 6, 3, 4,
-    7, 8, 9, 5, 6
-  });
+    DenseMatrix<int> m2(3, 5, {
+      1, 2, 3, 1, 2,
+      4, 5, 6, 3, 4,
+      7, 8, 9, 5, 6
+    });
 
-  m2 = m1;
+    m2 = m1;
 
-  VERIFY_EQ(m2, m1);
+    VERIFY_EQ(m2, m1);
   END_TEST;
+
+  BEGIN_TEST("DenseMatrix::DenseMatrix(DenseMatrix)");
+    DenseMatrix<int> m1(3, 3, {
+      1, 2, 3,
+      4, 5, 6,
+      7, 8, 9
+    });
+
+    DenseMatrix<int> m2(0, 0);
+
+    m2 = m1;
+
+    VERIFY_EQ(m2, m1);
+  END_TEST;
+
 
   BEGIN_TEST("DenseMatrix::get(SizeType, SizeType)");
   BEGIN_TEST("DenseMatrix::set(SizeType, SizeType, ValueType)");

@@ -80,11 +80,11 @@ public:
 void test_Poisson()
 {
   int N = 5;
-  Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double>> P;
-  DenseMatrix<long double> exact(N,N), numeric(0,0);
+  Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
+  DenseMatrix<long double> exact(N,N);
 
   // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
-  numeric = P.solve(N);
+  DenseMatrix<long double> numeric = P.solve(N);
 
   // std::cout << numeric << '\n';
 

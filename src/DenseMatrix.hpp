@@ -27,10 +27,11 @@ DenseMatrix<T>::DenseMatrix(const SizeType rows, const SizeType cols , const std
 template<class T>
 DenseMatrix<T>::DenseMatrix(const DenseMatrix<T>& other): AMatrix<T>(other), m_data(other.m_data)
 {
+  assert(&m_data != &other.m_data);
 }
 
 template<class T>
-DenseMatrix<T>::DenseMatrix(DenseMatrix<T>&& other): AMatrix<T>(other), m_data(other.m_data)
+DenseMatrix<T>::DenseMatrix(DenseMatrix<T>&& other): AMatrix<T>(other), m_data(std::move(other.m_data) )
 {
 }
 

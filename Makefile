@@ -21,10 +21,10 @@
 .PHONY: all clean depend_tester depend_driver
 
 #CXX = g++
-CXX = clang++
+CXX = g++
 
 ### Flags
-CXXFLAGS = -g -Wall -W -pedantic-errors -std=c++11
+CXXFLAGS = -g -Wall -Wextra -W -pedantic-errors -std=c++11
 
 ### Compiler includes
 CXX_INCLUDES = . include RLib

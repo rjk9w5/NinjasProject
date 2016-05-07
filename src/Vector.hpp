@@ -22,8 +22,8 @@ template<class T>
 Vector<T>::Vector(const Vector<T>& other): m_size(other.m_size), m_capacity(other.m_capacity), m_data( new T[m_capacity]() )
 {
   assert(m_capacity >= m_size);
-
   std::copy(other.m_data.get(), other.m_data.get()+m_size, m_data.get());
+  assert(m_data.get() != other.m_data.get());
 }
 
 template<class T>
@@ -67,10 +67,6 @@ Vector<T>& Vector<T>::operator=(Vector<T>&& rhs)
     m_size = rhs.m_size;
     m_capacity = rhs.m_capacity;
     m_data = std::move(rhs.m_data);
-
-    rhs.m_size = 0;
-    rhs.m_capacity = 0;
-    rhs.m_data.reset(nullptr);
   }
   return *this;
 }
@@ -303,10 +299,7 @@ Vector<T>& Vector<T>::copy(const Vector<T>& other)
   m_capacity = other.m_capacity;
 
   m_data.reset( new T[m_capacity]() );
-  for(SizeType i = 0; i < m_size; i++)
-  {
-    m_data[i] = other.m_data[i];
-  }
+  std::copy(other.m_data.get(), other.m_data.get()+m_size, m_data.get());
   return *this;
 }
 
