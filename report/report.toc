@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {I}Introduction}{3}
+\contentsline {section}{\numberline {II}Models}{3}
+\contentsline {subsection}{\numberline {II.A}Blasius Boundary Layer}{3}
+\contentsline {subsection}{\numberline {II.B}Poisson's Equation}{4}
+\contentsline {subsubsection}{\numberline {II.B.1}Liebmann Method}{7}
+\contentsline {subsubsection}{\numberline {II.B.2}Steepest Decent}{7}
+\contentsline {section}{\numberline {III}Results}{8}
+\contentsline {subsection}{\numberline {III.A}Blasius Boundary Layer}{8}
+\contentsline {subsection}{\numberline {III.B}Poisson's Equation}{9}
+\contentsline {section}{\numberline {IV}Conclusion}{11}
