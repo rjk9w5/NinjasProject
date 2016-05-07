@@ -14,7 +14,16 @@ Vector<T> GaussSeidel<T>::operator()(const BandedMatrix<T>& aMatrix, const Vecto
   {
     for(int i=0; i<bVector.size(); ++i)//   for i = 1:1:max(size(b))
     {
-      solution[i] = (bVector[i] - aMatrix.getRow(i)*solution + aMatrix.get(i,i)*solution[i])/aMatrix.get(i,i); //     x(i) = (b(i) - dot(A(i,:),x) + A(i,i)*x(i))/A(i,i);
+      // Multiply solution by aMatrix row
+      T proj = 0;
+      int start = std::max(0, static_cast<int>(i) - static_cast<int>(aMatrix.lowerBands()) );
+      int size = std::min(aMatrix.cols(), static_cast<int>(i) + aMatrix.upperBands() + 1);
+      for(int j = start; j < size; j++)
+      {
+        proj += (*(aMatrix.getPtr(i, j)) ) * solution[j];
+      }
+      // solution[i] = (bVector[i] - aMatrix.getRow(i)*solution + aMatrix.get(i,i)*solution[i])/aMatrix.get(i,i); //     x(i) = (b(i) - dot(A(i,:),x) + A(i,i)*x(i))/A(i,i);
+      solution[i] = (bVector[i] - proj + aMatrix.get(i,i)*solution[i])/aMatrix.get(i,i);
     } //   end
     r = bVector - aMatrix*solution; //   r = b - A*x;
     errv = norm(r); //   errv(it) = norm(r);
