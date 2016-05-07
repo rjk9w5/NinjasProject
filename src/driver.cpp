@@ -9,7 +9,7 @@
 #include <fstream>
 
 #include "Poisson.h"
-#include "project_parameters.h"
+#include "ProjectParameters.h"
 #include "DenseMatrix.h"
 
 int main(int argc, char ** argv)
@@ -54,7 +54,7 @@ int main(int argc, char ** argv)
         exact_solution.set(i,j,solxy(h*i, h*j));
         exact_average += exact_solution.get(i,j);
       }
-    }  
+    }
 
     // Solve Poisson using two methods
     numeric_solutionSD = P.solve(SD_solver, N[k]);
@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
       }
     }
 
-    // Write results to Octave files for ease of plotting 
+    // Write results to Octave files for ease of plotting
     fout.open("poisson_Usd" + N_strings[k] + ".m");
     numeric_solutionSD.outputOctave(fout, "Usd" + N_strings[k]);
     fout.close();

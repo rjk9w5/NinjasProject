@@ -11,7 +11,7 @@
 #include <fstream>
 
 #include "Poisson.h"
-#include "project_parameters.h"
+#include "ProjectParameters.h"
 #include "DenseMatrix.h"
 
 void test_Poisson()
