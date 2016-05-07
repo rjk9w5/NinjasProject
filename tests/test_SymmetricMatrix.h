@@ -11,6 +11,8 @@
 
 #include "MatrixType.h"
 #include "SymmetricMatrix.h"
+#include "UpperTriMatrix.h"
+#include "LowerTriMatrix.h"
 
 void test_SymmetricMatrix()
 {

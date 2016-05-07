@@ -4,10 +4,10 @@
 /// @brief Lower Triangular Matrix
 //////////////////////////////////////////////////////////////////////
 
-#ifndef LOWER_TRI_MATRIX_H
-#define LOWER_TRI_MATRIX_H
+#ifndef LOWER_TRIANGULAR_MATRIX_H
+#define LOWER_TRIANGULAR_MATRIX_H
 
-#include "SymDenseMatrix.h"
+#include "SymmetricMatrix.h"
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
@@ -77,19 +77,32 @@
 /// @brief Lower Triangular Matrix
 //////////////////////////////////////////////////////////////////////
 template<class T>
-class LowerTriMatrix: public SymDenseMatrix<T>
+class LowerTriMatrix: public SymmetricMatrix<T>
 {
 public:
-  LowerTriMatrix(const int m);
+  using ValueType = typename AMatrix<T>::ValueType;
+  using ReferenceType = typename AMatrix<T>::ReferenceType;
+  using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
+  using PointerType = typename AMatrix<T>::PointerType;
+  using ConstPointerType = typename AMatrix<T>::ConstPointerType;
+  using SizeType = typename AMatrix<T>::SizeType;
+
+  LowerTriMatrix(const SizeType size);
   LowerTriMatrix(const LowerTriMatrix<T>& other);
   LowerTriMatrix(LowerTriMatrix<T>&& other);
-  virtual ~LowerTriMatrix();
+  virtual ~LowerTriMatrix(){}
 
-  LowerTriMatrix<T>& operator=(const LowerTriMatrix<T>& rhs);
-  LowerTriMatrix<T>& operator=(LowerTriMatrix<T>&& rhs);
+  virtual MatrixType type() const { return MatrixType::LOWERTRI; }
 
-  virtual void set(const int m, const int n, const T& value);
-  virtual T get(const int m, const int n) const;
+  LowerTriMatrix<T>& operator=(const LowerTriMatrix<T>& other);
+  LowerTriMatrix<T>& operator=(LowerTriMatrix<T>&& other);
+
+  virtual ValueType get(const SizeType row, const SizeType col) const;
+  virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
+
+  LowerTriMatrix<T>& copy(const LowerTriMatrix<T>& other) { return BandedMatrix<T>::copy(other); }
+  LowerTriMatrix<T>& swap(LowerTriMatrix<T>& other) { return BandedMatrix<T>::swap(other); }
+  LowerTriMatrix<T>& move(LowerTriMatrix<T>&& other) { return BandedMatrix<T>::move(other); }
 };
 
 #include "src/LowerTriMatrix.hpp"

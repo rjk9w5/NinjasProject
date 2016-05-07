@@ -4,10 +4,10 @@
 /// @brief Upper Triangular Matrix
 //////////////////////////////////////////////////////////////////////
 
-#ifndef UPPER_TRI_MATRIX_H
-#define UPPER_TRI_MATRIX_H
+#ifndef UPPER_TRIANGULAR_MATRIX_H
+#define UPPER_TRIANGULAR_MATRIX_H
 
-#include "SymDenseMatrix.h"
+#include "SymmetricMatrix.h"
 #include "Vector.h"
 
 //////////////////////////////////////////////////////////////////////
@@ -74,22 +74,35 @@
 
 //////////////////////////////////////////////////////////////////////
 /// @class UpperTriMatrix
-/// @brief Upper  Tridiagonal Matrix
+/// @brief Upper  Triangular Matrix
 //////////////////////////////////////////////////////////////////////
 template<class T>
-class UpperTriMatrix: public SymDenseMatrix<T>
+class UpperTriMatrix: public SymmetricMatrix<T>
 {
 public:
-  UpperTriMatrix(const int m);
+  using ValueType = typename AMatrix<T>::ValueType;
+  using ReferenceType = typename AMatrix<T>::ReferenceType;
+  using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
+  using PointerType = typename AMatrix<T>::PointerType;
+  using ConstPointerType = typename AMatrix<T>::ConstPointerType;
+  using SizeType = typename AMatrix<T>::SizeType;
+
+  UpperTriMatrix(const SizeType size);
   UpperTriMatrix(const UpperTriMatrix<T>& other);
   UpperTriMatrix(UpperTriMatrix<T>&& other);
-  virtual ~UpperTriMatrix();
+  virtual ~UpperTriMatrix(){}
 
-  UpperTriMatrix<T>& operator=(const UpperTriMatrix<T>& rhs);
-  UpperTriMatrix<T>& operator=(UpperTriMatrix<T>&& rhs);
+  virtual MatrixType type() const { return MatrixType::UPPERTRI; }
 
-  virtual void set(const int m, const int n, const T& value);
-  virtual T get(const int m, const int n) const;
+  UpperTriMatrix<T>& operator=(const UpperTriMatrix<T>& other);
+  UpperTriMatrix<T>& operator=(UpperTriMatrix<T>&& other);
+
+  virtual ValueType get(const SizeType row, const SizeType col) const;
+  virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
+
+  UpperTriMatrix<T>& copy(const UpperTriMatrix<T>& other) { return BandedMatrix<T>::copy(other); }
+  UpperTriMatrix<T>& swap(UpperTriMatrix<T>& other) { return BandedMatrix<T>::swap(other); }
+  UpperTriMatrix<T>& move(UpperTriMatrix<T>&& other) { return BandedMatrix<T>::move(other); }
 };
 
 #include "src/UpperTriMatrix.hpp"
