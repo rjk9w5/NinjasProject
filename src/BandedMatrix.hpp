@@ -117,6 +117,29 @@ std::ostream& BandedMatrix<T>::output(std::ostream& stream) const
 }
 
 template<class T>
+std::ostream& BandedMatrix<T>::altOutput(std::ostream& stream) const
+{
+  for(SizeType i = 0; i < m_data.rows(); i++)
+  {
+    for(SizeType j = 0; j < m_data.cols(); j++)
+    {
+      stream << std::setw(8);
+      if(true)
+      {
+        stream << m_data.get(i, j);
+      }
+      else
+      {
+        stream << '-';
+      }
+      stream << " ";
+    }
+    stream << std::endl;
+  }
+  return stream;
+}
+
+template<class T>
 BandedMatrix<T>& BandedMatrix<T>::copy(const BandedMatrix<T>& other)
 {
   m_upperBands = other.m_upperBands;

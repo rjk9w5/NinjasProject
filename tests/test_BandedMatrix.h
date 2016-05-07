@@ -105,7 +105,9 @@ void test_BandedMatrix()
     VERIFY_EQ(m.get(5,4), 3 );
     VERIFY_EQ(m.get(6,5), 3 );
 
-    std::cout << m << std::endl;
+    std::cout << m << std::endl << std::endl;
+
+    m.altOutput(std::cout) << std::endl << std::endl;
   END_TEST;
   END_TEST;
 

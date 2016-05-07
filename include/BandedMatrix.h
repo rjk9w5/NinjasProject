@@ -34,6 +34,7 @@ public:
   virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
   virtual std::ostream& output(std::ostream& stream) const;
+  virtual std::ostream& altOutput(std::ostream& stream) const;
 
   BandedMatrix<T>& copy(const BandedMatrix<T>& other);
   BandedMatrix<T>& swap(BandedMatrix<T>& other);
