@@ -33,6 +33,8 @@ public:
   virtual ValueType get(const SizeType row, const SizeType col) const;
   virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
+  virtual Vector<ValueType> getRow(const SizeType row) const;
+
   virtual std::ostream& output(std::ostream& stream) const;
   virtual std::ostream& altOutput(std::ostream& stream) const;
 
@@ -42,6 +44,8 @@ public:
 
   SizeType upperBands() const { return m_upperBands; }
   SizeType lowerBands() const { return m_lowerBands; }
+
+
 
 private:
   SizeType m_upperBands;

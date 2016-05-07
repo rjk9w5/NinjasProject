@@ -105,6 +105,15 @@ void test_BandedMatrix()
     VERIFY_EQ(m.get(5,4), 3 );
     VERIFY_EQ(m.get(6,5), 3 );
 
+
+    VERIFY_EQ(m.getRow(0), Vector<int>({1, 2, 4, 0, 0, 0, 0}) );
+    VERIFY_EQ(m.getRow(1), Vector<int>({3, 1, 2, 4, 0, 0, 0}) );
+    VERIFY_EQ(m.getRow(2), Vector<int>({0, 3, 1, 2, 4, 0, 0}) );
+    VERIFY_EQ(m.getRow(3), Vector<int>({0, 0, 3, 1, 2, 4, 0}) );
+    VERIFY_EQ(m.getRow(4), Vector<int>({0, 0, 0, 3, 1, 2, 4}) );
+    VERIFY_EQ(m.getRow(5), Vector<int>({0, 0, 0, 0, 3, 1, 2}) );
+    VERIFY_EQ(m.getRow(6), Vector<int>({0, 0, 0, 0, 0, 3, 1}) );
+
     std::cout << m << std::endl << std::endl;
 
     m.altOutput(std::cout) << std::endl << std::endl;

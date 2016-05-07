@@ -58,11 +58,11 @@ BandedMatrix<T>& BandedMatrix<T>::operator=(BandedMatrix<T>&& other)
 template<class T>
 typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, const SizeType col) const
 {
-  if(row >= this->rows() || col >= this->cols())
-  {
-    throw std::out_of_range( GEN_EXCEPT("Given row, column index must be less than actual row, columns") );
-  }
-  else if(col + m_lowerBands >= row && col <= row + m_upperBands)
+  // if(row >= this->rows() || col >= this->cols())
+  // {
+  //   throw std::out_of_range( GEN_EXCEPT("Given row, column index must be less than actual row, columns") );
+  // }
+   if(col + m_lowerBands >= row && col <= row + m_upperBands)
   {
     return m_data.get(m_upperBands + row - col, col);
   }
@@ -73,8 +73,17 @@ typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, con
 }
 
 template<class T>
-typename Vector<BandedMatrix<T>::ValueType> BandedMatrix<T>::getRow(const SizeType row) const
+Vector< typename BandedMatrix<T>::ValueType > BandedMatrix<T>::getRow(const SizeType row) const
 {
+  Vector<ValueType> ret(this->cols());
+
+  int start = std::max({0, static_cast<int>(row) - static_cast<int>(m_lowerBands) });
+  int size = std::min({this->cols(), static_cast<int>(row) + m_upperBands + 1});
+  for(int j = start; j < size; j++)
+  {
+    ret[j] = this->get(row, j);
+  }
+  return ret;
 }
 
 template<class T>
