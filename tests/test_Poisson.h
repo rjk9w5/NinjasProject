@@ -17,58 +17,61 @@
 // Information Provided for the Boundary Conditions were Y is constant and X
 //   is constant respectively...
 
-class Forcing: public AFunctorxy<double>
+template <class T>
+class Forcing: public AFunctorxy<T>
 {
 public:
-  virtual double operator()(const double& x, const double& y)
+  virtual T operator()(const T& x, const T& y)
   {
     return -2*(x*x + y*y);
   }
 };
 
-class ConstY: public ABoundaryCondition<double>
+template <class T>
+class ConstY: public ABoundaryCondition<T>
 {
 public:
-  virtual double upper(const double &x)
-  {
-    return 1 - x*x;
-  }
-
-  virtual double lower(const double &x)
+  virtual T upper(const T &x)
   {
     return 2*(1 - x*x);
   }
 
-  virtual double upper_bound()
+  virtual T lower(const T &x)
+  {
+    return (1 - x*x);
+  }
+
+  virtual T upper_bound()
   {
     return 1;
   }
 
-  virtual double lower_bound()
+  virtual T lower_bound()
   {
     return 0;
   }
 };
 
-class ConstX: public ABoundaryCondition<double>
+template <class T>
+class ConstX: public ABoundaryCondition<T>
 {
 public:
-  virtual double upper(const double &y)
+  virtual T upper(const T &y)
   {
     return 0;
   }
 
-  virtual double lower(const double &y)
+  virtual T lower(const T &y)
   {
     return 1 + y*y;
   }
 
-  virtual double upper_bound()
+  virtual T upper_bound()
   {
     return 1;
   }
 
-  virtual double lower_bound()
+  virtual T lower_bound()
   {
     return 0;
   }
@@ -76,9 +79,9 @@ public:
 
 void test_Poisson()
 {
-  int N = 10;
-  Poisson<double, ConstX, ConstY, Forcing> P;
-  DenseMatrix<double> exact(N,N), numeric(0,0);
+  int N = 5;
+  Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double>> P;
+  DenseMatrix<long double> exact(N,N), numeric(0,0);
 
   // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
   numeric = P.solve(N);
@@ -89,3 +92,5 @@ void test_Poisson()
 }
 
 #endif
+
+// -3.000 -1.011 -1.042 -1.093 -1.165 -1.257 -1.370 -2.463

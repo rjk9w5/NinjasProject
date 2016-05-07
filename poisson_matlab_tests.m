@@ -16,8 +16,8 @@ uy1_bound = @(xx) 2.*ly0_bound(xx);
 f = @(xx,yy) -2*(xx^2 + yy^2);
 
 % Solution grid sizing
-N = 10;
-M = 10;
+N = 5;
+M = 5;
 n = N-2;
 m = M-2;
 
@@ -63,19 +63,27 @@ for i = 2:1:n+1
     b(index) = (h^2)*f(x(i),y(j));
 
     if(i==2)
-      b(index) = b(index) - lam*lx0_bound(y(j)); index;
+      b(index) = b(index) - lam*lx0_bound(y(j));
+      lx0_bound(y(j))
+      index;
     end
 
     if(i==n+1)
-      b(index) = b(index) - lam*ux1_bound(y(j)); index;
+      b(index) = b(index) - lam*ux1_bound(y(j));
+      ux1_bound(y(j))
+      index;
     end
 
     if(j==2)
-      b(index) = b(index) - ly0_bound(x(i)); index;
+      b(index) = b(index) - ly0_bound(x(i));
+      ly0_bound(x(i))
+      index;
     end
 
     if(j==m+1)
-      b(index) = b(index) - uy1_bound(x(i)); index;
+      b(index) = b(index) - uy1_bound(x(i));
+      uy1_bound(x(i))
+      index;
     end
     index = index + 1;
   end
@@ -90,63 +98,63 @@ itl
 
 fign=1;
 
-figure(fign)
-semilogy(1:1:its-1,errvs, 'LineWidth', 2)
-title('Error plot for Steepest Decent')
-xlabel('Iteration')
-ylabel('Error (||r||)')
-fign = fign + 1;
+% figure(fign)
+% semilogy(1:1:its-1,errvs, 'LineWidth', 2)
+% title('Error plot for Steepest Decent')
+% xlabel('Iteration')
+% ylabel('Error (||r||)')
+% fign = fign + 1;
 
-figure(fign)
-semilogy(1:1:itl-1,errvl, 'LineWidth', 2)
-title('Error plot for Liebmann Iteration')
-xlabel('Iteration')
-ylabel('Error (||r||)')
-fign = fign + 1;
+% figure(fign)
+% semilogy(1:1:itl-1,errvl, 'LineWidth', 2)
+% title('Error plot for Liebmann Iteration')
+% xlabel('Iteration')
+% ylabel('Error (||r||)')
+% fign = fign + 1;
 
-Us = U;
-Ul = U;
+% Us = U;
+% Ul = U;
 
-index = 1;
-for i = 2:1:n+1
-  for j = 2:1:m+1
-    Us(i,j) = u_inners(index);
-    Ul(i,j) = u_innerl(index);
-    index = index + 1;
-  end
-end
+% index = 1;
+% for i = 2:1:n+1
+%   for j = 2:1:m+1
+%     Us(i,j) = u_inners(index);
+%     Ul(i,j) = u_innerl(index);
+%     index = index + 1;
+%   end
+% end
 
-[X,Y] = meshgrid(x,y);
+% [X,Y] = meshgrid(x,y);
 
-u_af = @(xx,yy) (1 - xx.^2).*(1 + yy.^2);
+% u_af = @(xx,yy) (1 - xx.^2).*(1 + yy.^2);
 
-u_a = u_af(X,Y);
+% u_a = u_af(X,Y);
 
-figure(fign)
-hold on
-surf(X,Y,Us')
-title('Steepest Decent Solution Plot')
-ylabel('y')
-xlabel('x')
-zlabel('u(x,y)')
-fign = fign + 1;
+% figure(fign)
+% hold on
+% surf(X,Y,Us')
+% title('Steepest Decent Solution Plot')
+% ylabel('y')
+% xlabel('x')
+% zlabel('u(x,y)')
+% fign = fign + 1;
 
-figure(fign)
-hold on
-surf(X,Y,Ul')
-title('Liebmann Iteration Solution Plot')
-ylabel('y')
-xlabel('x')
-zlabel('u(x,y)')
-fign = fign + 1;
+% figure(fign)
+% hold on
+% surf(X,Y,Ul')
+% title('Liebmann Iteration Solution Plot')
+% ylabel('y')
+% xlabel('x')
+% zlabel('u(x,y)')
+% fign = fign + 1;
 
-figure(fign)
-hold on
-surf(X,Y,u_a)
-title('Analytical Solution Plot')
-ylabel('y')
-xlabel('x')
-zlabel('u(x,y)')
-fign = fign + 1;
+% figure(fign)
+% hold on
+% surf(X,Y,u_a)
+% title('Analytical Solution Plot')
+% ylabel('y')
+% xlabel('x')
+% zlabel('u(x,y)')
+% fign = fign + 1;
 
-input('Pause...')
+% input('Pause...')

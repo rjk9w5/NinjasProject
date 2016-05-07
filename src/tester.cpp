@@ -27,6 +27,8 @@ int main(int argc, char** argv)
 
   test_SymmetricMatrix();
 
+  test_Poisson();
+
   END_GLOBAL_TESTS;
 
   return 0;
