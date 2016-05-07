@@ -16,8 +16,8 @@ uy1_bound = @(xx) 2.*ly0_bound(xx);
 f = @(xx,yy) -2*(xx^2 + yy^2);
 
 % Solution grid sizing
-N = 17;
-M = 17;
+N = 20;
+M = 20;
 n = N-2;
 m = M-2;
 
@@ -141,6 +141,9 @@ zlabel('u(x,y)')
 fign = fign + 1;
 
 pois_res_U
+x = linspace(x_min, x_max, size(U)(1));
+y = linspace(y_min, y_max, size(U)(1));
+[X,Y] = meshgrid(x,y);
 figure(fign)
 hold on
 surf(X,Y,U')

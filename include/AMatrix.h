@@ -13,6 +13,7 @@
 #include <iostream>
 #include <memory>
 #include <initializer_list>
+#include <string>
 
 //////////////////////////////////////////////////////////////////////
 /// @fn int AMatrix<T>::rows() const;
@@ -156,6 +157,7 @@ public:
 
   virtual std::istream& input(std::istream& stream);
   virtual std::ostream& output(std::ostream& stream) const;
+  virtual std::ostream& outputOctave(std::ostream& stream, const std::string& filename) const;
   virtual bool isEqual(const AMatrix<T>& other) const;
 
 protected:

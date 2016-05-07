@@ -80,7 +80,7 @@ public:
 
 void test_Poisson()
 {
-  int N = 17;
+  int N = 20;
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   DenseMatrix<long double> exact(N,N);
 
@@ -89,7 +89,8 @@ void test_Poisson()
 
   std::ofstream fout;
   fout.open("pois_res_U.m");
-  fout << "U = [" << numeric << "];\n";
+  // fout << "U = [" << numeric << "];\n";
+  numeric.outputOctave(fout, "U");
   fout.close();
 
   // std::cout << numeric << '\n';

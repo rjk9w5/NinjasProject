@@ -24,7 +24,7 @@
 CXX = clang++
 
 ### Flags
-CXXFLAGS = -g -Wall -Wextra -W -pedantic-errors -std=c++11
+CXXFLAGS = -g -Wall -Wextra -W -pedantic-errors -std=c++11 -O3
 
 ### Compiler includes
 CXX_INCLUDES = . include RLib
