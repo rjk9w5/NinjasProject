@@ -125,11 +125,11 @@ fign=1;
 %   end
 % end
 
-N = 50;
-M = 50;
-
 poisson_Ugs;
 poisson_Usd;
+
+N = size(Ugs)(1);
+M = size(Ugs)(2);
 
 x = linspace(x_min,x_max,N);
 y = linspace(y_min,y_max,M);
