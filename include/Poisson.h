@@ -11,6 +11,8 @@
 #include "DenseMatrix.h"
 #include "Vector.h"
 #include "ALinSysSolver.h"
+#include "SteepestDescent.h"
+#include "GaussSeidel.h"
 #include "Functor.h"
 #include <cmath>
 

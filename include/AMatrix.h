@@ -176,5 +176,18 @@ bool operator==(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return lhs.isEqu
 template<class T>
 bool operator!=(const AMatrix<T>& lhs, const AMatrix<T>& rhs) { return !lhs.isEqual(rhs); }
 
+template <class T> 
+Vector<T> operator*(const AMatrix<T>& lhs, const Vector<T>& rhs)
+{
+  assert(lhs.cols() == rhs.size());
+  Vector<T> ret(lhs.rows());
+  for(int i=0; i<lhs.rows(); ++i)
+  {
+    ret[i] = lhs.getRow(i)*rhs;
+  }
+
+  return ret;
+}
+
 #include "src/AMatrix.hpp"
 #endif

@@ -16,4 +16,9 @@ public:
   virtual Vector<T> operator()(const Matrix& aMatrix, const Vector<T>& bVector) = 0;
 };
 
+namespace iterative
+{
+  constexpr long double TOLERANCE = 0.00000001; 
+}
+
 #endif

@@ -8,6 +8,7 @@
 #define TEST_POISSON_H
 
 #include <iostream>
+#include <fstream>
 
 #include "Poisson.h"
 #include "BoundaryCondition.h"
@@ -79,12 +80,17 @@ public:
 
 void test_Poisson()
 {
-  int N = 5;
+  int N = 17;
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   DenseMatrix<long double> exact(N,N);
 
   // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
   DenseMatrix<long double> numeric = P.solve(N);
+
+  std::ofstream fout;
+  fout.open("pois_res_U.m");
+  fout << "U = [" << numeric << "];\n";
+  fout.close();
 
   // std::cout << numeric << '\n';
 

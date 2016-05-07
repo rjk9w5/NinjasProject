@@ -408,6 +408,19 @@ template<class T>
   Vector<T> operator-(Vector<T> lhs, const Vector<T>& rhs) { return lhs -= rhs; }
 
 template<class T>
+  T operator*(Vector<T> lhs, const Vector<T>& rhs) 
+  { 
+    // assert(lhs.size()==rhs.size());
+    T ret = 0;
+    for(int i=0; i < lhs.size(); ++i)
+    {
+      ret+=rhs[i]*lhs[i];
+    }
+    return ret; 
+  }
+
+
+template<class T>
   Vector<T> operator*(Vector<T> lhs, const T& rhs) { return lhs *= rhs; }
 template<class T>
   Vector<T> operator*(const T& lhs, const Vector<T>& rhs) { return rhs * lhs; }
