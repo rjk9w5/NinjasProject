@@ -80,7 +80,7 @@ public:
 
 void test_Poisson()
 {
-  int N = 15;
+  int N = 30;
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   DenseMatrix<long double> exact(N,N);
 
