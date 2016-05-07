@@ -73,6 +73,11 @@ typename BandedMatrix<T>::ValueType BandedMatrix<T>::get(const SizeType row, con
 }
 
 template<class T>
+typename Vector<BandedMatrix<T>::ValueType> BandedMatrix<T>::getRow(const SizeType row) const
+{
+}
+
+template<class T>
 void BandedMatrix<T>::set(const SizeType row, const SizeType col, ConstReferenceType value)
 {
   if(row >= this->rows() || col >= this->cols())

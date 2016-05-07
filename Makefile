@@ -69,8 +69,8 @@ drive: $(DRIVER_EXE)
 test: $(TESTER_EXE)
 	./$(TESTER_EXE)
 
-cachegrind: $(TESTER_EXE)
-	valgrind --tool=callgrind $(TESTER_EXE)
+callgrind: $(TESTER_EXE)
+	valgrind --tool=callgrind ./$(TESTER_EXE)
 
 ### Main targets
 $(TESTER_EXE): $(TESTER_OBJECTS) $(TESTERS_H)
