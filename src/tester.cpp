@@ -10,6 +10,7 @@
 #include "tests/test_DenseMatrix.h"
 #include "tests/test_BandedMatrix.h"
 #include "tests/test_TridiagMatrix.h"
+#include "tests/test_SymmetricMatrix.h"
 
 #include <iostream>
 
@@ -22,6 +23,8 @@ int main(int argc, char** argv)
   test_DenseMatrix();
   test_BandedMatrix();
   test_TridiagMatrix();
+
+  test_SymmetricMatrix();
 
   END_GLOBAL_TESTS;
 

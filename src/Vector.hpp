@@ -43,11 +43,6 @@ Vector<T>::Vector(const std::initializer_list<T>& l): m_size(l.size()), m_capaci
 }
 
 template<class T>
-Vector<T>::~Vector()
-{
-}
-
-template<class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& rhs)
 {
   assert(m_capacity >= m_size);

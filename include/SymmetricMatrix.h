@@ -79,6 +79,7 @@ template<class T>
 class SymmetricMatrix: public AMatrix<T>
 {
 public:
+  using ValueType = typename AMatrix<T>::ValueType;
   using ReferenceType = typename AMatrix<T>::ReferenceType;
   using ConstReferenceType = typename AMatrix<T>::ConstReferenceType;
   using PointerType = typename AMatrix<T>::PointerType;
@@ -98,11 +99,15 @@ public:
   virtual ValueType get(const SizeType row, const SizeType col) const;
   virtual void set(const SizeType row, const SizeType col, ConstReferenceType value);
 
-  Symmetric<T>& copy(const Symmetric<T>& other);
-  Symmetric<T>& swap(Symmetric<T>& other);
-  Symmetric<T>& move(Symmetric<T>&& other);
+  SymmetricMatrix<T>& copy(const SymmetricMatrix<T>& other);
+  SymmetricMatrix<T>& swap(SymmetricMatrix<T>& other);
+  SymmetricMatrix<T>& move(SymmetricMatrix<T>&& other);
+
+  friend void test_SymmetricMatrix();
 protected:
   Vector<ValueType> m_data;
+
+  SizeType rowColToIndex(const SizeType row, const SizeType col) const;
 };
 
 #include "src/SymmetricMatrix.hpp"

@@ -328,7 +328,7 @@ public:
   Vector(const Vector<ValueType>& other);
   Vector(Vector<ValueType>&& other);
   Vector(const std::initializer_list<ValueType>& l);
-  ~Vector();
+  virtual ~Vector() {}
 
   Vector<ValueType>& operator=(const Vector<ValueType>& rhs);
   Vector<ValueType>& operator=(Vector<ValueType>&& rhs);
