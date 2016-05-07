@@ -20,7 +20,9 @@
 
 .PHONY: all clean depend_tester depend_driver
 
-#CXX = g++
+# Uncomment this to use g++. clang++ was found to be noticably faster for this
+# project with -O3 flag compared to g++ with either -O3 or -Ofast flags...
+# CXX = g++
 CXX = clang++
 
 ### Flags
