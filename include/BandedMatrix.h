@@ -7,6 +7,8 @@
 #ifndef BANDED_MATRIX_H
 #define BANDED_MATRIX_H
 
+#include <utility>
+
 #include "AMatrix.h"
 #include "DenseMatrix.h"
 
@@ -55,6 +57,28 @@ private:
   DenseMatrix<ValueType> m_data;
 
 };
+
+template <class T>
+Vector<T> operator*(const BandedMatrix<T>& lhs, const Vector<T>& rhs)
+{
+  assert(lhs.cols() == rhs.size());
+  Vector<T> ret(lhs.rows());
+  // for(int i=0; i<lhs.rows(); ++i)
+  // {
+  //   ret[i] = lhs.getRow(i)*rhs;
+  // }
+
+  for(int i = 0; i < lhs.rows(); i++)
+  {
+    int start = std::max(0, static_cast<int>(i) - static_cast<int>(lhs.lowerBands()) );
+    int size = std::min(lhs.cols(), static_cast<int>(i) + lhs.upperBands() + 1);
+    for(int j = start; j < size; j++)
+    {
+      ret[i] += (*(lhs.getPtr(i, j)) ) * rhs[j];
+    }
+  }
+  return ret;
+}
 
 #include "src/BandedMatrix.hpp"
 #endif

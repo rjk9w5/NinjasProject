@@ -108,6 +108,7 @@ clean:
 	- rm -f depend_tester
 	- rm -f $(DRIVER_OBJECTS)
 	- rm -f $(TESTER_OBJECTS)
+	- rm -f callgrind.out.*
 	@ echo "======== Cleaned!"
 	@ echo ""
 
