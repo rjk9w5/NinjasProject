@@ -149,7 +149,10 @@ std::ostream& AMatrix<T>::output(std::ostream& stream) const
 template<class T>
 std::ostream& AMatrix<T>::outputOctave(std::ostream& stream, const std::string& varname) const
 {
-  stream << varname << " = [" << output(stream) << "];\n";
+  stream << varname << " = [";
+  output(stream) << "];\n";
+
+  return stream;
 }
 
 template<class T>
