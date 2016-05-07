@@ -16,8 +16,8 @@ uy1_bound = @(xx) 2.*ly0_bound(xx);
 f = @(xx,yy) -2*(xx^2 + yy^2);
 
 % Solution grid sizing
-N = 1000;
-M = 1000;
+N = 50;
+M = 50;
 n = N-2;
 m = M-2;
 
@@ -125,54 +125,63 @@ fign=1;
 %   end
 % end
 
+N = 50;
+M = 50;
+
+poisson_Ugs;
+poisson_Usd;
+
+x = linspace(x_min,x_max,N);
+y = linspace(y_min,y_max,M);
+
 [X,Y] = meshgrid(x,y);
 
 u_af = @(xx,yy) (1 - xx.^2).*(1 + yy.^2);
 
 u_a = u_af(X,Y);
 
-% figure(fign)
-% hold on
-% surf(X,Y,Us')
-% title('Steepest Decent Solution Plot')
-% ylabel('y')
-% xlabel('x')
-% zlabel('u(x,y)')
-% fign = fign + 1;
+figure(fign)
+hold on
+surf(X,Y,Usd')
+title('Steepest Decent Solution Plot')
+ylabel('y')
+xlabel('x')
+zlabel('u(x,y)')
+fign = fign + 1;
 
 % pois_res_U
 
 % sm = 0;
-asm = 0;
-for i = 1:1:N
-  for j = 1:1:M
-    % sm = sm + U(i,j);
-    asm = asm + u_a(i,j);
-  end
-end
+% asm = 0;
+% for i = 1:1:N
+%   for j = 1:1:M
+%     % sm = sm + U(i,j);
+%     asm = asm + u_a(i,j);
+%   end
+% end
 
 % avg = sm/(N*N);
-aavg = asm/(N*N)
+% aavg = asm/(N*N)
 % avg
 % x = linspace(x_min, x_max, size(U)(1));
 % y = linspace(y_min, y_max, size(U)(1));
 % [X,Y] = meshgrid(x,y);
-% figure(fign)
-% hold on
-% surf(X,Y,U')
-% title('Liebmann Iteration Solution Plot')
-% ylabel('y')
-% xlabel('x')
-% zlabel('u(x,y)')
-% fign = fign + 1;
+figure(fign)
+hold on
+surf(X,Y,Ugs')
+title('Liebmann Iteration Solution Plot')
+ylabel('y')
+xlabel('x')
+zlabel('u(x,y)')
+fign = fign + 1;
 
-% figure(fign)
-% hold on
-% surf(X,Y,u_a)
-% title('Analytical Solution Plot')
-% ylabel('y')
-% xlabel('x')
-% zlabel('u(x,y)')
-% fign = fign + 1;
+figure(fign)
+hold on
+surf(X,Y,u_a)
+title('Analytical Solution Plot')
+ylabel('y')
+xlabel('x')
+zlabel('u(x,y)')
+fign = fign + 1;
 
 % input('Pause...')

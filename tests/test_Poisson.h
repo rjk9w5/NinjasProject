@@ -82,36 +82,13 @@ void test_Poisson()
 {
   BEGIN_TESTS("Poisson");
 
-  int N = 5;
-  DenseMatrix<long double> exact_solution(N,N);
-  Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
-  long double h = (1.0l)/(N-1);
-  long double exact_average = 0, numeric_average = 0;
-
-  auto solxy = [](const long double x, const long double y)
-  {
-    return (1 - x*x)*(1 + y*y);
-  };
-
-  for(std::size_t i=0; i<N; ++i)
-  {
-    for(std::size_t j=0; j<N; ++j)
-    {
-      exact_solution.set(i,j,solxy(h*i, h*j));
-      exact_average += exact_solution.get(i,j);
-    }
-  }
-
-  std::cout << exact_solution << '\n';
-  std::cout << exact_average << '\n';
-
 /* ------------------------------------------------------------- *\
  *                    Test 1: Steepest Descent                   *
 \* ------------------------------------------------------------- */
 
   BEGIN_TEST("Solver: SteepestDescent");
 
-  int N = 5;
+  int N = 50;
   DenseMatrix<long double> exact_solution(N,N);
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   long double h = (1.0l)/(N-1);
@@ -157,7 +134,7 @@ void test_Poisson()
 \* ------------------------------------------------------------- */
   BEGIN_TEST("Solver: GaussSeidel");
 
-  int N = 5;
+  int N = 50;
   DenseMatrix<long double> exact_solution(N,N);
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   long double h = (1.0l)/(N-1);
@@ -194,7 +171,7 @@ void test_Poisson()
   numeric_solution.outputOctave(fout, "Ugs");
   fout.close();
 
-  VERIFY_NEAREQ(exact_average, numeric_average, .001)
+  VERIFY_NEAREQ(exact_average, numeric_average, .001);
 
   END_TEST;
 
