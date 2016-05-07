@@ -83,17 +83,16 @@ void test_Poisson()
   int N = 20;
   Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
   DenseMatrix<long double> exact(N,N);
+  SteepestDescent<long double> SD_solver;
 
-  // numeric = P.solve(ALinSysSolver<double, BandedMatrix<double>>& blank, N);
-  DenseMatrix<long double> numeric = P.solve(N);
+  DenseMatrix<long double> numeric = P.solve(SD_solver, N);
+  // DenseMatrix<long double> numeric = P.solve(N);
 
   std::ofstream fout;
   fout.open("pois_res_U.m");
   // fout << "U = [" << numeric << "];\n";
   numeric.outputOctave(fout, "U");
   fout.close();
-
-  // std::cout << numeric << '\n';
 
   return;
 }
