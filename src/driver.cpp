@@ -4,7 +4,7 @@
 /// @brief Driver file for homework 6
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <chrono>
+#include <chrono> // std::chrono::system_clock::now()
 #include <iostream>
 #include <fstream>
 
@@ -14,6 +14,10 @@
 
 int main(int argc, char ** argv)
 {
+  // Timer
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  std::chrono::duration<double> elapsed_seconds; // = end-start;
+
   // Matrix Solvers
   SteepestDescent<long double> SD_solver;
   GaussSeidel<long double> GS_solver;
@@ -52,23 +56,42 @@ int main(int argc, char ** argv)
       for(std::size_t j=0; j<N[k]; ++j)
       {
         exact_solution.set(i,j,solxy(h*i, h*j));
-        exact_average += exact_solution.get(i,j);
+        exact_average += exact_solution.get(i,j)/N[k];
       }
-    }  
+    }
 
     // Solve Poisson using two methods
+    std::cout << "Steepest Descent: N = " + N_strings[k] + "\n";
+    start = std::chrono::system_clock::now();
     numeric_solutionSD = P.solve(SD_solver, N[k]);
-    numeric_solutionGS = P.solve(GS_solver, N[k]);
-
+    end = std::chrono::system_clock::now();
     // Calculate a comparison metric for the solutions
     for(std::size_t i=0; i<N[k]; ++i)
     {
       for(std::size_t j=0; j<N[k]; ++j)
       {
-        numeric_averageSD += numeric_solutionSD.get(i,j);
-        numeric_averageGS += numeric_solutionGS.get(i,j);
+        numeric_averageSD += numeric_solutionSD.get(i,j)/N[k];
       }
     }
+    std::cout << "Total Relative Error: " << fabs(exact_average - numeric_averageSD)/exact_average << '\n';
+    elapsed_seconds = end-start;
+    std::cout << "Time elapsed: " << elapsed_seconds.count() << "s.\n\n";
+
+    std::cout << "Gauss-Seidel: N = " + N_strings[k] + "\n";
+    start = std::chrono::system_clock::now();
+    numeric_solutionGS = P.solve(GS_solver, N[k]);
+    end = std::chrono::system_clock::now();
+    // Calculate a comparison metric for the solutions
+    for(std::size_t i=0; i<N[k]; ++i)
+    {
+      for(std::size_t j=0; j<N[k]; ++j)
+      {
+        numeric_averageGS += numeric_solutionGS.get(i,j)/N[k];
+      }
+    }
+    std::cout << "Total Relative Error: " << fabs(exact_average - numeric_averageGS)/exact_average << '\n';
+    elapsed_seconds = end-start;
+    std::cout << "Time elapsed: " << elapsed_seconds.count() << "s.\n\n";
 
     // Write results to Octave files for ease of plotting 
     fout.open("poisson_Usd" + N_strings[k] + ".m");
