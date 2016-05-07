@@ -41,3 +41,6 @@ callgrind.out*
 cachegrind.out*
 
 output.txt
+
+pois_res_U.m
+pois_res.m
