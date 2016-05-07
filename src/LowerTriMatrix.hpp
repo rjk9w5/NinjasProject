@@ -6,7 +6,7 @@
 
 template<class T>
 LowerTriMatrix<T>::LowerTriMatrix(const SizeType size):
-  SymmetricMatrix<T>(size);
+  SymmetricMatrix<T>(size)
 {
 }
 
@@ -23,7 +23,7 @@ LowerTriMatrix<T>::LowerTriMatrix(LowerTriMatrix<T>&& other):
 }
 
 template<class T>
-LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(const UpperTriMatrix<T>& other)
+LowerTriMatrix<T>& LowerTriMatrix<T>::operator=(const LowerTriMatrix<T>& other)
 {
   if(this != &other)
   {

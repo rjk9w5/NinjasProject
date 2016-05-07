@@ -6,7 +6,7 @@
 
 template<class T>
 UpperTriMatrix<T>::UpperTriMatrix(const SizeType size):
-  SymmetricMatrix<T>(size);
+  SymmetricMatrix<T>(size)
 {
 }
 
