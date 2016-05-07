@@ -23,8 +23,8 @@ public:
   typedef T ValueType;
   typedef size_t SizeType;
 
-  // DenseMatrix<T> solve(const ALinSysSolver<T, BandedMatrix<T>>& solver, const size_t N);
-  DenseMatrix<T> solve(const size_t N);
+  DenseMatrix<T> solve(const ALinSysSolver<T, BandedMatrix<T>>& solver, const size_t N);
+  // DenseMatrix<T> solve(const size_t N);
 private:
   T_XBound m_xBound;
   T_YBound m_yBound;

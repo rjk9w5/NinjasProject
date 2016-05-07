@@ -1,7 +1,7 @@
 
 
 template<class T>
-Vector<T> GaussSeidel<T>::operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector)
+Vector<T> GaussSeidel<T>::operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector) const
 {
   Vector<T> solution(bVector), r(bVector.size());//   x = b;
   LpNorm<2, T> norm;

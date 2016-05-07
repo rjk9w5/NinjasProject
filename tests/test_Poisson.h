@@ -94,6 +94,9 @@ void test_Poisson()
   numeric.outputOctave(fout, "U");
   fout.close();
 
+  // Average of solution bwtween .85 and .89
+  
+
   return;
 }
 

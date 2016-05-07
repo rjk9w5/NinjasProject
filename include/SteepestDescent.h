@@ -13,7 +13,7 @@ template<class T>
 class SteepestDescent: public ALinSysSolver<T, BandedMatrix<T> >
 {
 public:
-  Vector<T> operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector);
+  Vector<T> operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector) const;
 };
 
 

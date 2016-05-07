@@ -13,7 +13,7 @@ template<class T, class Matrix>
 class ALinSysSolver 
 {
 public:
-  virtual Vector<T> operator()(const Matrix& aMatrix, const Vector<T>& bVector) = 0;
+  virtual Vector<T> operator()(const Matrix& aMatrix, const Vector<T>& bVector) const = 0;
 };
 
 namespace iterative

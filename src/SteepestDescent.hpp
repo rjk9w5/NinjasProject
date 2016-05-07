@@ -1,7 +1,7 @@
 
 
 template<class T>
-Vector<T> SteepestDescent<T>::operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector)
+Vector<T> SteepestDescent<T>::operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector) const
 {
   Vector<T> solution(bVector), sk;//   x = b;
   LpNorm<2, T> norm;
