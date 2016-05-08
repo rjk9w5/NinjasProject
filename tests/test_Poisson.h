@@ -24,11 +24,11 @@ void test_Poisson()
   //////////////////////////////////////////////////////////////////////////////
 
   BEGIN_TEST("Solver: SteepestDescent");
-    int N = 25;
-    DenseMatrix<long double> exact_solution(N,N);
-    Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
-    long double h = (1.0l)/(N-1);
-    long double exact_average = 0, numeric_average=0;
+
+    auto solxy = [](const long double x, const long double y)
+    {
+      return (1 - x*x)*(1 + y*y);
+    };
 
   int N = 15;
   DenseMatrix<long double> exact_solution(N,N);
@@ -68,11 +68,10 @@ void test_Poisson()
   ///                     Test 2: Gauss Seidel
   //////////////////////////////////////////////////////////////////////////////
   BEGIN_TEST("Solver: GaussSeidel");
-    int N = 25;
-    DenseMatrix<long double> exact_solution(N,N);
-    Poisson<long double, ConstX<long double>, ConstY<long double>, Forcing<long double> > P;
-    long double h = (1.0l)/(N-1);
-    long double exact_average = 0, numeric_average = 0;
+  auto solxy = [](const long double x, const long double y)
+  {
+    return (1 - x*x)*(1 + y*y);
+  };
 
   int N = 15;
   DenseMatrix<long double> exact_solution(N,N);
