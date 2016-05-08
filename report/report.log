@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.12)  5 MAY 2016 08:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.12)  7 MAY 2016 19:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -404,120 +404,96 @@ e
 \tf@lol=\write4
 \openout4 = `report.lol'.
 
- [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 174--179
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 324--329
-
- []
-
-<cdiff_grid.png, id=32, 270.00874pt x 188.705pt>
+[3] <cdiff_grid.png, id=27, 270.00874pt x 188.705pt>
 File: cdiff_grid.png Graphic file (type png)
  <use cdiff_grid.png>
-Package pdftex.def Info: cdiff_grid.png used on input line 352.
+Package pdftex.def Info: cdiff_grid.png used on input line 202.
 (pdftex.def)             Requested size: 234.88098pt x 164.15474pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--360
-
- []
-
-[5 <./cdiff_grid.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 368--371
+Underfull \hbox (badness 10000) in paragraph at lines 205--210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--382
+Underfull \hbox (badness 10000) in paragraph at lines 218--221
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--391
+Underfull \hbox (badness 10000) in paragraph at lines 229--232
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 409--412
+Underfull \hbox (badness 10000) in paragraph at lines 236--241
+
+ []
+
+[4 <./cdiff_grid.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 259--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--425
+Underfull \hbox (badness 10000) in paragraph at lines 270--275
 
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 486--494
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 486--494
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 511--519
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 336--344
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 532--537
+Underfull \hbox (badness 10000) in paragraph at lines 336--344
 
  []
 
-<stream_fnct.png, id=47, 548.0475pt x 412.54124pt>
-File: stream_fnct.png Graphic file (type png)
- <use stream_fnct.png>
-Package pdftex.def Info: stream_fnct.png used on input line 563.
-(pdftex.def)             Requested size: 228.88219pt x 172.29044pt.
 
-<uue_fnct.png, id=48, 547.04375pt x 411.5375pt>
-File: uue_fnct.png Graphic file (type png)
- <use uue_fnct.png>
-Package pdftex.def Info: uue_fnct.png used on input line 564.
-(pdftex.def)             Requested size: 228.88034pt x 172.18521pt.
+Underfull \hbox (badness 10000) in paragraph at lines 361--369
 
-<fpp_fnct.png, id=49, 541.02126pt x 404.51125pt>
-File: fpp_fnct.png Graphic file (type png)
- <use fpp_fnct.png>
-Package pdftex.def Info: fpp_fnct.png used on input line 565.
-(pdftex.def)             Requested size: 228.87843pt x 171.12802pt.
- [8]
-<pois_ana.png, id=53, 546.04pt x 411.5375pt>
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--387
+
+ []
+
+[6] <pois_ana.png, id=40, 546.04pt x 411.5375pt>
 File: pois_ana.png Graphic file (type png)
  <use pois_ana.png>
-Package pdftex.def Info: pois_ana.png used on input line 603.
+Package pdftex.def Info: pois_ana.png used on input line 414.
 (pdftex.def)             Requested size: 228.87698pt x 172.49919pt.
 
-<pois_sd.png, id=55, 540.0175pt x 406.51875pt>
+<pois_sd.png, id=42, 540.0175pt x 406.51875pt>
 File: pois_sd.png Graphic file (type png)
  <use pois_sd.png>
-Package pdftex.def Info: pois_sd.png used on input line 604.
+Package pdftex.def Info: pois_sd.png used on input line 415.
 (pdftex.def)             Requested size: 228.87404pt x 172.29364pt.
 
-<pois_lieb.png, id=56, 544.0325pt x 406.51875pt>
+<pois_lieb.png, id=43, 544.0325pt x 406.51875pt>
 File: pois_lieb.png Graphic file (type png)
  <use pois_lieb.png>
-Package pdftex.def Info: pois_lieb.png used on input line 605.
+Package pdftex.def Info: pois_lieb.png used on input line 416.
 (pdftex.def)             Requested size: 228.88225pt x 171.02824pt.
 
-<sd_err.png, id=57, 544.0325pt x 416.55624pt>
+<sd_err.png, id=44, 544.0325pt x 416.55624pt>
 File: sd_err.png Graphic file (type png)
  <use sd_err.png>
-Package pdftex.def Info: sd_err.png used on input line 613.
+Package pdftex.def Info: sd_err.png used on input line 424.
 (pdftex.def)             Requested size: 228.88225pt x 175.25116pt.
 
-<lieb_err.png, id=58, 543.02875pt x 408.52625pt>
+<lieb_err.png, id=45, 543.02875pt x 408.52625pt>
 File: lieb_err.png Graphic file (type png)
  <use lieb_err.png>
-Package pdftex.def Info: lieb_err.png used on input line 614.
+Package pdftex.def Info: lieb_err.png used on input line 425.
 (pdftex.def)             Requested size: 228.87424pt x 172.18451pt.
- [9 <./stream_fnct.png> <./uue_fnct.png> <./fpp_fnct.png>] [10 <./pois_ana.png>
- <./pois_sd.png> <./pois_lieb.png> <./sd_err.png> <./lieb_err.png>]
+ [7 <./pois_ana.png> <./pois_sd.png> <./pois_lieb.png>]
 Missing character: There is no ‚ in font cmr8!
 Missing character: There is no Ä in font cmr8!
 Missing character: There is no ú in font cmr8!
@@ -525,143 +501,53 @@ Missing character: There is no ‚ in font cmr8!
 Missing character: There is no Ä in font cmr8!
 Missing character: There is no ù in font cmr8!
 
-Overfull \hbox (6.79153pt too wide) in paragraph at lines 653--654
+Overfull \hbox (6.79153pt too wide) in paragraph at lines 454--455
 []\OT1/cmr/m/n/8 Numerical meth-ods, \OT1/cmr/m/it/8 -- CFD-Wiki, the free CFD 
 ref-er-ence \OT1/cmr/m/n/8 Avail-able: []\OT1/cmtt/m/n/8 http://www.cfd-online.
 com/wiki/numerical_methods\OT1/cmr/m/n/8 . 
  []
 
-Missing character: There is no ‚ in font cmr8!
-Missing character: There is no Ä in font cmr8!
-Missing character: There is no ú in font cmr8!
-Missing character: There is no ‚ in font cmr8!
-Missing character: There is no Ä in font cmr8!
-Missing character: There is no ù in font cmr8!
-[11
-
-] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2013/08/26 1.5b listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2013/08/26 1.5b listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
-)
-(/home/ryan/Documents/NumLib/examples/blasius/main.cpp
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 3.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 3.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 7.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
-
-Overfull \hbox (28.25005pt too wide) in paragraph at lines 23--25
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][] 
- []
-
-
-Overfull \hbox (214.25194pt too wide) in paragraph at lines 35--37
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-) (/home/ryan/Documents/NumLib/examples/blasius/blasius.cpp [12])
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2013/08/26 1.5b listings language file
-)
-(/home/ryan/Documents/NumLib/examples/blasius/plot_results.m
-Overfull \hbox (28.25005pt too wide) in paragraph at lines 11--12
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (34.2501pt too wide) in paragraph at lines 12--13
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (34.2501pt too wide) in paragraph at lines 13--14
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (34.2501pt too wide) in paragraph at lines 14--15
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.25023pt too wide) in paragraph at lines 15--16
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (118.25096pt too wide) in paragraph at lines 16--17
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (340.25322pt too wide) in paragraph at lines 18--19
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][] 
- []
-
-) (/home/ryan/Documents/OONM/Homework/NinjasProject/poisson_matlab_tests.m
-[13] [14]
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
- [15]) (/home/ryan/Documents/OONM/Homework/NinjasProject/sd_solver.m)
-(/home/ryan/Documents/OONM/Homework/NinjasProject/liebmann.m [16])
+Missing character: There is no ‚ in font cmti8!
+Missing character: There is no Å in font cmti8!
+Missing character: There is no ∫ in font cmti8!
 
 AED: lastpage setting LastPage
-[17] (./report.aux)
+[8 <./sd_err.png> <./lieb_err.png>] (./report.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 5991 strings out of 494985
- 83597 string characters out of 6180355
- 213370 words of memory out of 5000000
- 9070 multiletter control sequences out of 15000+600000
- 11108 words of font info for 40 fonts, out of 8000000 for 9000
+ 4950 strings out of 494985
+ 70617 string characters out of 6180355
+ 147973 words of memory out of 5000000
+ 8071 multiletter control sequences out of 15000+600000
+ 10508 words of font info for 38 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 38i,13n,61p,308b,1605s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,13n,45p,262b,334s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.p
-fb>
-Output written on report.pdf (17 pages, 410707 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmtt8.pfb>
+Output written on report.pdf (8 pages, 308749 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 124 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
