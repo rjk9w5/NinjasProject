@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////////////////
-/// @file header.h
-/// @author Your name and class section here
-/// @brief A brief description of the file
-////////////////////////////////////////////////////////////////////// 
+/// @file GaussSeidel.h
+/// @author Russley Shaw & Ryan Krattiger
+/// @brief Functor solver implementing GaussSeidel
+//////////////////////////////////////////////////////////////////////
 
 #ifndef GAUSS_SEIDEL_SOLVER_H
 #define GAUSS_SEIDEL_SOLVER_H
@@ -11,6 +11,15 @@
 #include "BandedMatrix.h"
 #include "LpNorm.h"
 #include "Vector.h"
+
+//////////////////////////////////////////////////////////////////////
+/// @fn operator()(const BandedMatrix<T>&, const Vector,T>&) const;
+/// @brief Performs linear sys solver operations
+/// @pre Given matrix must be linearly independent
+/// @param aMatrix The A in Ax=b
+/// @param bVector The b in Ax=b
+/// @return Vector<T>, the x in Ax=b
+//////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 /// @class GaussSeidel

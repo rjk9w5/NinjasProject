@@ -1,4 +1,8 @@
-
+//////////////////////////////////////////////////////////////////////
+/// @file GaussSeidel.hpp
+/// @author Russley Shaw
+/// @brief Implementation of Gauss Seidel Systems solver
+//////////////////////////////////////////////////////////////////////
 
 template<class T>
 Vector<T> GaussSeidel<T>::operator()(const BandedMatrix<T>& aMatrix, const Vector<T>& bVector) const

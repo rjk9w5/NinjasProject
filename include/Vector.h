@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////
+/// @file Vector.h
+/// @author Russley Shaw
+/// @brief Header for mathematical vector
+//////////////////////////////////////////////////////////////////////
+
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -408,15 +414,15 @@ template<class T>
   Vector<T> operator-(Vector<T> lhs, const Vector<T>& rhs) { return lhs -= rhs; }
 
 template<class T>
-  T operator*(Vector<T> lhs, const Vector<T>& rhs) 
-  { 
+  T operator*(Vector<T> lhs, const Vector<T>& rhs)
+  {
     // assert(lhs.size()==rhs.size());
     T ret = 0;
     for(int i=0; i < lhs.size(); ++i)
     {
       ret+=rhs[i]*lhs[i];
     }
-    return ret; 
+    return ret;
   }
 
 
