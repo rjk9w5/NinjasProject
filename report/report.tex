@@ -59,11 +59,15 @@
 \graphicspath{./}
 \usepackage{listings}
 
- \title{Final Project: \\ Blasius Boundary Layer and Poisson's Equation}
+ \title{Final Project: \\ Poisson's Equation}
 
  \author{
   Ryan J. Krattiger%
     \thanks{Undergraduate Senior, Department of Mechanical and Aerospace Engineering.} \\
+  {\normalsize\itshape
+  Missouri University of Science and Technology, Rolla, MO, 65401, USA} \\
+  Russley F. Shaw%
+    \thanks{Undergraduate Senior, Department of Computer Science.} \\
   {\normalsize\itshape
   Missouri University of Science and Technology, Rolla, MO, 65401, USA}
  }
@@ -85,14 +89,7 @@
 \maketitle
 
 \begin{abstract}
-The Blasius Boundary Layer equation and Poisson's equation were solved
-in this report. The Blasius was solved for the general form; however, the solution
-was not expanded on beyond the similarity solution. Poisson's equation was similarly
-solved, but for a set of solvable boundary conditions. The reason for this was to
-allow for a comparison of methods via error, which requires an exact solution.
-It should be clear from the examples provided that the functionality developed in
-these solvers is robust enough to apply the corresponding methods to a wide variety
-of scientific and engineering problems.
+
 \end{abstract}
 
 \newpage
@@ -109,165 +106,18 @@ of scientific and engineering problems.
   XXX \= \kill% this line sets tab stop
   $f$ \> Function \\
   $\bar x$ \> Variable value vector \\
-  $\nu$ \> Dynamic viscosity \\
-  $U$ \> Velocity magnitude \\
   h \> Step size \\
   x \> x-position \\
-  $\delta$ \> Boundary Layer thickness \\
   $\bar r$ \> residual vector \\
   \textit{Subscript} \\
   $i$ \> Row index \\
   $j$ \> Column index \\
-  $e$ \> Boundary layer edge \\
  \end{tabbing}
-
-
-% ---------------------------------------------------------------------------- %
-%                                 INTRODUCTION                                 %
-% ---------------------------------------------------------------------------- %
-\FloatBarrier\section{Introduction}
-\lettrine[nindent=0pt]{F}{or} the final project it was perscribed to apply a minimum of six numerical methods
-from six unique topics covered in the Applied Computational Methods course. The
-problems choosen were to be from either relevent research or applications to engineering.
-The two problems choosen and presented in this report include a solution to the Blasius
-Boundary Layer equation and solution methods for Poisson's equation
-(commonly used in eletromagnitism, 2D Heat transfer, Subsonic flow fields, etc.). The
-Blasius equation used solved using the Runge-Kutta 4-step method coupled with the
-secant method to provide a smart `shooting` method. Once this equation was solved,
-numerical integration was carried out to verify the solution. The Poisson equation was
-solved by first discretizing using central difference differentiation for a second
-derivative, then assembled into a system of linear equations and sovled using the
-Liebmann (Gauss-Seidel) Method and Steepest Decent Method.
-
 
 % ---------------------------------------------------------------------------- %
 %                                     MODEL                                    %
 % ---------------------------------------------------------------------------- %
 \FloatBarrier\section{Models}
-This section will highlight the models used in the final project and the respective
-solution methods implemented. The focus of this section is two parts. This first
-is to demonstrate the physical significance of the problem and the second is to
-show the general idea of what methods were implemented and why they were choosen.
-
-% ----------------------- %
-% -- Blasius BL Section --%
-% ----------------------- %
-\FloatBarrier\subsection{Blasius Boundary Layer}
-The Blasiun equation is used to model boundary layer over a 2D flat plate as a
-similarity solution. The general form of this equation is given as Eq~\ref{e:blas_diff}
-where f is a function of $\eta$, the similarity parameter.
-
-\begin{equation}
-  \label{e:blas_diff}
-  2 f''' + f f'' = 0
-\end{equation}
-
-In order to do this accomplish this solution Blasius first converted (x,y) pairs
-to ($\xi$, $\eta$) using Eq~\ref{e:blas_trans}.
-
-\begin{equation}
-  \label{e:blas_trans}
-  \xi = x \quad \textrm{and} \quad \eta = y \sqrt{\frac{U}{\nu x}}
-\end{equation}
-
-Using $\eta$ it is then possible to define the function f($\eta$) such that the stream
-function ($\psi$) can be expressed as Eq~\ref{e:blas_stream}.
-
-\begin{equation}
-  \label{e:blas_stream}
-  \psi = \sqrt{\nu U x} f(\eta)
-\end{equation}
-
-From the stream function the x- and y-velocity components are then easily found
-by simply differentiating the stream function to obtain the results in Eq~\ref{e:blas_u}
-and Eq~\ref{e:blas_v} respectively.
-
-\begin{equation}
-  \label{e:blas_u}
-  u(x,\eta) = \frac{\partial \psi}{\partial y} = U f'
-\end{equation}
-
-\begin{equation}
-  \label{e:blas_v}
-  v(x,\eta) = -\frac{\partial \psi}{\partial x} = \sqrt{\frac{\nu U}{x}} (\eta f' - f)
-\end{equation}
-
-And further the shear stress at the wall, $\tau_{wall}$, can be found using the
-gradient of the x-velocity with respect to $\eta$ as seen in Eq~\ref{e:blas_shear}.
-
-\begin{equation}
-  \label{e:blas_shear}
-  \tau_{wall}(x) = \mu \frac{d u}{d \eta} \vert_{\eta=0} = \mu U f''\vert_{\eta=0}
-\end{equation}
-
-where $\mu$ is the dynamic viscosity. \\
-
-Since it is clear that this ODE can be useful, it is now worth while to solve it.
-In order to solve this ODE using a Runge-Kutta 4-step scheme it is required to
-decompose the Eq~\ref{e:blas_diff} into a system of coupled first order ODEs.
-This decomposition can be seen in Eq.~\ref{e:blas_cupode}.
-
-where
-
-\begin{equation}
-\label{e:blas_cupode}
-  \bar Z = \begin{bmatrix}
-    z_1 \\ z_2 \\ z_3
-  \end{bmatrix} =
-  \begin{bmatrix}
-    f \\ f' \\ f''
-  \end{bmatrix}
-  \quad \textrm{and} \quad
-  \bar Z' = \begin{bmatrix}
-    z_1' \\ z_2' \\ z_3'
-  \end{bmatrix} =
-  \begin{bmatrix}
-    f' \\ f'' \\ f'''
-  \end{bmatrix} =
-  \begin{bmatrix}
-    z_2 \\ z_3 \\ - \frac{1}{2} z_1 z_2
-  \end{bmatrix}
-\end{equation}
-
-Additionally the boundary conditions must be provided for the initial value problem
-that is to be solved. In this case it is known that the horizontal velocity (u), and so the stream
-function ($\psi$) must both be zero at the wall (y=0). Additionally, it is known that
-at the boundary layer edge, the velocity is equivelant to the freestream ($u=u_e$).
-This translates to the boundary conditions in Eq~\ref{e:blas_bc}
-
-\begin{equation}
-  \label{e:blas_bc}
-  f(0) = 0 \quad f'(0) = 0 \quad f'(\infty) = 1
-\end{equation}
-
-It is noticed that there is no initial condition for the $z_3$ or f'' term. In
-to determine this value, it is required to perform the shooting method, or in
-layman's terms guess. The criteria that will be met to
-determine if the initial guess is good is to find where $f'(\eta_n) - 1 = 0$.
-But to do a little better than just guessing, the secant method
-will be used to find the zero of this criteria.
-
-Solving $\bar Z'$ in order to determine what the values of f, $f'$, and $f''$ are
-will be done using the Runge-Kutta 4-step (RK4) method dicussed in class. A note here
-that any method for solving an ODE could be used here but the RK4 was choosen for
-nostalgic reasons.
-
-In the attached code the method of how the RK4 method was nested in the secant
-method can be seen. The essence of the idea was to wrap the RK4 solving the given
-ODE in a function of a single variable, $f''(0)$ or $z_{2,0}$, and return the result of $f'(\eta_{max}) - 1 = 0$.
-Then this was nested inside of another loop that check for convergence of $f''(0)$
-as $\eta_{max}$ increased in the domain $\eta_{max} \in [1,\infty)$ with increment
-steps of 1. This was done to capture the effect of $\infty$ while performing the
-minimum number of iterations. Note, as $\eta_{max}$ increased the step size if the
-ODE solver remained at 0.1 using a scaling factor of 10 in order to maintain uniformity
-in each iteration.
-
-The last test performed for this problem was with numerical integration. In order
-to verify that the f'' and f' values agree, as they should from how the problem was
-defined, f'' was integrated over the interval using simpson's 1/3 rule. The reason
-this method was choosen over the trapezoidal method or a gauss quadrature method
-was due to the higly contoured shape of the f'' solution and the lack of an actual
-function to evaluate at specific points respectively. 
 
 % ----------------------- %
 % -- Poisson's Equation --%
@@ -276,13 +126,16 @@ function to evaluate at specific points respectively.
 
 The poisson eqaution is used in many diciplines as it is a common mathematical
 model found in physical systems. Because of the relative complexity of these
-physical systems, a simplified and solvable example was used simple to demonstrate
-the application of two different solution methods.
+physical systems, a simplified and solvable example was used to demonstrate 
+two different linear system solvers. The methods presented here are 
+Steepest Descent Optimization and Gauss-Seidel Iterations, or as applied to PDE
+solvers the Liebmann Method.
 
 The first thing to consider is the general form of Poisson's equation as seen in
 Eq~\ref{e:p_diff}. It is clear that this is a second order, linear, partial differential
-equation in three dimensions, x, y. The forcing function, f(x,y), can be anything
-depending on the problem and is one of five drivers for the solution.
+equation in two dimensions, x and y. The forcing function, f(x,y), can be anything
+depending on the problem and is one of five drivers for the solution, including the
+four boundary conditions.
 
 \begin{equation}
   \label{e:p_diff}
@@ -290,11 +143,11 @@ depending on the problem and is one of five drivers for the solution.
 \end{equation}
 
 Being a second order PDE, it is required to have two boundary conditions for each
-independent variable. In this case that would be x and y, resulting in a required
+independent variable. In this case that would be x and y, resulting in the required
 four boundary conditions.
 
-For the problem to be solved here, the forcing function can be seen in Eq~\ref{e:p_f}
-and the boundary conditions are writen in Eq~\ref{e:p_bcx} and q~\ref{e:p_bcy}.
+For the current problem, the forcing function can be seen in Eq~\ref{e:p_f}
+and the boundary conditions are writen in Eq~\ref{e:p_bcx} and Eq~\ref{e:p_bcy}.
 
 \begin{equation}
   \label{e:p_f}
@@ -318,8 +171,7 @@ It can be shown that the exact solution for these constraints is as seen in Eq~\
   u(x,y) = (1 - x^2)(1 + y^2)
 \end{equation}
 
-Reguardless of the forcing function and boundary conditions, the set up of the
-problem is done so generically, independant of any set of inputs.
+The set up of the problem is independent of any set of inputs.
 
 This first step is to descretize the original PDE as seen in Eq~\ref{e:p_diff} into
 the form seen in Eq~\ref{e:p_num}. It can be seen that the second order, central
@@ -333,7 +185,9 @@ Let $u(x_i,y_j) = u_{i,j}$, where $i \in [0,N]$, $j \in [0,M]$, and $h = \frac{x
 \end{equation}
 
 Further simplifying this equation and letting $\frac{h^2}{k^2} = \lambda$ gives a
-general simplified form for the numerical scheme (Eq~\ref{e:p_num_simp}).
+general simplified form for the numerical scheme (Eq~\ref{e:p_num_simp}). For this
+solver, it will be assumed that h and k are the same, or the grid is square and
+equally spaced. This is a constraint of the current implementation.
 
 \begin{equation}
   \label{e:p_num_simp}
@@ -353,10 +207,10 @@ be looked at as constants.
 \end{figure}
 
 In order to put the now discretized equation into a solvable form it is translated
-to a system of linear equations. After some work a matrix-vector pair can
-be found and the system and be written in the form of $A \bar x = \bar b$
+to a system of linear equations and can be written in the form of $A \bar x = \bar b$.
 \\\\
-where A is an MxM block diagonal matrix
+A is a MxM tridiagonal block matrix with blocks of size NxN. In total it is a 
+(NxM)x(NxM) matrix.
 $$
 \begin{bmatrix}
   T      & I     &     0   & \dots & 0 \\
@@ -380,8 +234,11 @@ $$
 \\\\
 and I is an NxN identity matrix.
 
-In total, A is (NxM)x(NxM) which is quite large. Luckily, there is sparse matrix
-support in most linear algebra/numerical libraries used in computing to handle this.
+In total, A is (NxM)x(NxM) which is quite large. To handle this, we developed a 
+contiguous banded matrix that supports upper and lower bands as well as the diagonal.
+In total, the relative storage is fractional in comparison to a traditional dense
+matrix for this problem. The total data storage is now NxNx(Number of bands) in 
+a dense matrix.
 
 The $\bar b$ vector is composed of two parts. This first is made up of the boundary
 conditions ($\bar c$), and the second is the forcing vector ($\bar d$). The resulting
@@ -434,9 +291,7 @@ $$
 $$
 
 In the final form of $A \bar x = (\bar c + \bar d)$ the Poisson equation is in a
-form that is solvable. The two methods that will be shown here are the Liebmann
-Method (also known as the Gauss-Seidel Method) and with a Steepest Decent optimization
-scheme.
+form that is solvable using afore mentioned linear system solving techniques.
 
 \subsubsection{Liebmann Method}
 As an iterative solving technique, Liebmann Method, also known as the Gauss-Seidel method,
@@ -476,10 +331,12 @@ each product of the A matrix row and the current solution vector, a minimum numb
 of operations will be performed. This also allows for the solver to work for multiple
 types of matrix problems and still obtain optimal performance without having to
 write a special solver for every sparse or dense matirx used. The same idea will
-be used again in the the next solver.
+be used again in the the next solver. In the implementation of this method is was named
+Gauss-Seidel to reflect the general form of the solver. Here, it was called Leibmann
+simply due to its use with PDEs.
 
-\subsubsection{Steepest Decent}
-Another iterative solver can be used, however the Steepest Decent method looks
+\subsubsection{Steepest Descent}
+Another iterative solver can be used, however the Steepest Descent method looks
 at this problem as an optimization problem rather than a system of linear equations
 solving problem.
 
@@ -513,8 +370,8 @@ is particularly well suited for optimization since the zero vector is not the
 minimum. By integrating the system the resulting equation is $\frac{1}{2} x^T A x - x^T b = 0$.
 This form of the equation does have a minimum as it is a quadratic system of eqations.
 \\\\
-For the Steepest Decent method, the search direction is determined by the local
-direction of steepest decent, or the negative gradient. The formula for this should look
+For the Steepest Descent method, the search direction is determined by the local
+direction of steepest descent, or the negative gradient. The formula for this should look
 familiar as Eq~\ref{e:p_sk}, which is the residual vector.
 
 \begin{equation}
@@ -533,62 +390,49 @@ where $\bar q_k = A s_k$.
 \\\\
 With the search direction ($s_k$) and optimal $\alpha_k^*$ it is a simple matter
 to update the solution vector. Again, this will iterator until convergence is
-found.
+found on the residual vector.
 
 There are two additional methods that are linked to Steepest decent. The first is
 Conjugant Gradient (CGM) and the second is Preconditioned Conjugant Gradient (PCGM).
 These methods both provide much faster convergence on average, but require more computations
 per step. More informatoin about these, and a brief study on how they improve the
 gradient based methods as applied to the solution of 2D Poisson's equation
-can be found in Holmes et. al.\cite{holmes:07bk}
+can be found in Holmes et. al.\cite{holmes:07bk}. It would be an excelent addition
+to this library to add these improved methods.
+
+\FloatBarrier\subsection{Data Structures}
+The foundation of all of the container data structures in this library is the 
+specialized mathematical vector named Vector. The vector is dynamically allocated 
+and resizeable using smart resizing techniques.
+
+\FloatBarrier\subsubsection{Matrices}
+The matrix classes begin with an abstract base class called AMatrix. The AMatrix
+not only outlines the common functionality between all matrix types, but also defines
+base implementations for many of these functions based on the assumption that a derived
+matrix class will define the accessor get(row, col) and mutator set(row, col, value).
+These implementations are usually not ideal for the specialized derived matrices;
+however, they provide us with a correct implementation with the ability to specialize
+further later.
+
+The first specialization of the AMatrix is a dense matrix called the DenseMatrix.
+The DenseMatrix specializes in densly packed elements in a matrix. Because of the
+assumptions that the AMatrix makes about the definitions of the accessors and mutators,
+the DenseMatrix's implementation of methods are similar enough to AMatrix's where
+we can simply use the majority of the functionality provided by AMatrix.
+The DenseMatrix holds the data internally as a one-dimensional Vector which we access
+in a row-column fashion. The same holds true for the mutator operations. Because of the denseness of the matrix, we must hold all elements. Therefore, a given DenseMatrix of size MxN will hold MxN elements. The importance  of the DenseMatrix to our library is that other matrix specialzations may use it as their own internal data storage (i.e. BandedMatrix).
+
+The next specialization of the AMatrix is the SymmetricMatrix, which specializes
+in operating on densely packed symmetic data. It utilizes a one dimensional Vector to contain all the elements. Because of this, given an MxM SymmetricMatrix, the Vector only holds $\frac{M(M+1)}{2}$ elements. The importance of the SymmetricMatrix - other than providing a container for dense, symmetric data - is that both upper and lower triangular matricies derive from SymmetricMatrix. These Matricies are names UpperTriMatrix and LowerTriMatrix respectivley. The triangular matricies operate the same as the symmetric matrix, but take advantage of virtual inheritence by being able to hide the SymmetricMatrix's accessor and mutator functionality in substitution of its own. Specifically, the UpperTriMatrix is able to restrict modification and evaluate as zero for its lower half and vice versa for the LowerTriMatrix.
+
+For modelling the linear system generated by discretizing Poisson's Equation, an implementation of the banded matrix is needed. Our library's implmentation is named BandedMatrix. This banded matrix is specialized to be contiguous and dense along the bands. The BandedMatrix is formulated by providing it the row and column, as well as a number of upper bands and a number of lower bands. Given X lower bands and Y upper bands, our data structure allocates Nx(X+Y+1) elements for the X \& Y bands and the diagonal. It additionally leverages optimizations for matrix access and multiplication. Included is also a getPtr(row, col), which returns a C++ pointer. This was included for operations that require many accesses to the underlying data. In addition to the BandedMatrix, a specialization is derived from it called the TridiagMatrix, which is simply a contiguous tridiagonal matrix. This specialization only requires modification of the derived type's constructor. 
 
 % ---------------------------------------------------------------------------- %
 %                                   RESULTS                                    %
 % ---------------------------------------------------------------------------- %
 \FloatBarrier\section{Results}
-The results presented here are simply to show the results and relevent error or
-convergence of methods used. 
 
-\FloatBarrier\subsection{Blasius Boundary Layer}
-In figure~\ref{f:blas_plots} the solution to the $\bar Z$ parameters are shown. 
-The values plotted are labeled as stream function, u/u$_e$ and shear stress but are
-actually f, f', and f'' respectively. The purpose of the naming was simply to 
-demonstrate the general profile of the flow for the relevent parameters calculated 
-using f, f', and f''.
-
-
-\begin{figure}[htb]% order of placement preference: here, top, bottom
-  \caption{Results from solving the Blasius Boundary Layer equation}
-  \begin{subfigmatrix}{2}
-    \subfigure[Stream Function]{\includegraphics{stream_fnct.png}}
-    \subfigure[Scaled Velocity Profile]{\includegraphics{uue_fnct.png}}
-    \subfigure[Wall Shear Stress]{\includegraphics{fpp_fnct.png}}
-  \end{subfigmatrix}
- \label{f:blas_plots}
-\end{figure}
-
-A second check to verify the solution obtained, the f'' result was integrated over
-the range in the converged iteration, $\eta_{max} = 15$.
-
-$$
-  \int_{0}{15} f''(\eta) d\eta = f'(15) - f'(0) = 1
-$$
-
-The result of this integration can be seen in the table table~\ref{t:blas_interror}.
-It can be seen that the numeric integral solution and the expected soltion are very close,
-especially for the integration results coming as the result of two seperate numerical methods.
-
-\begin{table}
-\centering
-\label{t:blas_interror}
-  \begin{tabular}{l | l}
-  Solution & Error \\
-  \hline
-  1.000023279653586 & 2.327965358617234e-05 \\
-  \end{tabular}
-\end{table}
-
-\FloatBarrier\subsection{Poisson's Equation}
+\FloatBarrier\subsection{Solutions}
 
 The figures~\ref{f:p_results} show the solution plots of each respective method.
 The plot of the norm of the residual as a function of iteration for each method
@@ -598,7 +442,7 @@ twice as many iterations to converge. The results from comparing the solution me
 for a 20x20 and 30x30 grid are not included here, but similar conclusions can be drawn. 
 
 \begin{figure}[htb]% order of placement preference: here, top, bottom
-  \caption{Results from solving the Blasius Boundary Layer equation}
+  \caption{Plots of the results to the Poisson for a 10x10 solution grid}
   \begin{subfigmatrix}{2}
     \subfigure[Exact Solution]{\includegraphics{pois_ana}}
     \subfigure[Steepest Decent Solution]{\includegraphics{pois_sd}}
@@ -608,7 +452,7 @@ for a 20x20 and 30x30 grid are not included here, but similar conclusions can be
 \end{figure}
 
 \begin{figure}[htb]% order of placement preference: here, top, bottom
-  \caption{Results from solving the Blasius Boundary Layer equation}
+  \caption{Convergence plot from the solution of the 10x10 grid}
   \begin{subfigmatrix}{2}
     \subfigure[Steepest Decent error vs iteration]{\includegraphics{sd_err}}
     \subfigure[Liebmann error vs iteration]{\includegraphics{lieb_err}}
@@ -616,35 +460,26 @@ for a 20x20 and 30x30 grid are not included here, but similar conclusions can be
  \label{f:p_convergeplot}
 \end{figure}
 
-Notice that for both methods the number of iterations required is greater than
-N. It may be tempting to say that this makes the cost of each of these methods
-roughly equal to that of a Gauss-Elimination as each step appears to be around
-O(N$^2$); however, that would be incorrect. Because of the sparse nature of the 
-matrix a good numerical library will leverage the fact that most values are zero
-and only perform operations on the non-zero values in the matrix and vector. In 
-Matlab, this may not always be the case. In the numerical library
-that was suppose to be used to solve this problem, and will be shortly after this
-paper is submitted, the described advantages are leveraged. So the actual complexity
-is only O(N) operations rather than O(N$^2$), which puts both of these methods
-ahead with a total complexity of roughly O(N$^2$).
+\FloatBarrier\subsection{Error-Time-Iterations}
+The error of the solutions produced was compared using the average of all the calculated nodes from both the analytical solution and the numerical solution. The figure~\ref{f:err_plot}
+
+\begin{figure}[htb]% order of placement preference: here, top, bottom
+  \caption{Convergence plot from the solution of the 10x10 grid}
+  \begin{subfigmatrix}{2}
+    \subfigure[Iteration vs N]{\includegraphics{iterations_study}}
+    \subfigure[Time vs N]{\includegraphics{time_study}}
+    \subfigure[Total Error vs N]{\includegraphics{err_study}}
+  \end{subfigmatrix}
+ \label{f:p_convergeplot}
+\end{figure}
 
 \FloatBarrier\section{Conclusion}
+In conclusion we found that our implementation of the Gauss-Siedel out performs the Steepest Decent method. At this point, the data structures and solvers have been optimized to the highest reasonable level without considering full code rewrites. It utilizes pointer to element access and and we realized that pointer access was better than the base accessors and mutators.
 
-It is clear that the numerical methods presented, when applied correctly as
-they have been here, are capable of providing extraordinarly powerful tools that
-allow humans to use computers to solve ever more complicated problems that occur
-in science and engineering. The study and advancement of numerical methods to solve these
-problems and make more robust and smarted (adaptive) solvers has been the key to increasing design and
-analysis speed in the past and will continue to be so in the future. Not to be
-excited about computing in this time is lame, which is why this project has been a pleassure to
-complete.
 
 \begin{thebibliography}{9}% maximum number of references (for label width)
  \bibitem{holmes:07bk}
  Holmes, M. H., {\it Introduction to numerical mehtods in differential equations}, New York, London: Springer, 2007.
-
-\bibitem{anderson:01bk}
-Anderson, J. D., {\it Fundamentals of aerodynamics}, Boston: McGraw-Hill, 2001.
 
 \bibitem{chapraetal:15bk}
 Chapra, S. C., and Canale, R. P., {\it Numerical Methods for Engineers}, McGraw-Hill, 2015.
@@ -652,22 +487,16 @@ Chapra, S. C., and Canale, R. P., {\it Numerical Methods for Engineers}, McGraw-
 \bibitem{cfdonline:web}
 “Numerical methods,” {\it -- CFD-Wiki, the free CFD reference} Available: \verb+http://www.cfd-online.com/wiki/numerical_methods+.
 
-\bibitem{hosder:lec}
-Hosder, S., “Applied Computaitonal Methods.” 
+\bibitem{bartnack:94bk}
+Barton, J. J., and Nackman, L. R., {\it Scientific and engineering C⁺: an introduction with advanced techniques and examples}, Reading, MA: Addison-Wesley, 1994.
 
 \end{thebibliography}
 
-\newpage
+\section*{Appendix}
 
-\FloatBarrier\section*{Appendix}
-
-\lstinputlisting[language=C++, caption=Main for Blasius Solver]{/home/ryan/Documents/NumLib/examples/blasius/main.cpp}
-\lstinputlisting[language=C++, caption=Implementation of Blasius Routine]{/home/ryan/Documents/NumLib/examples/blasius/blasius.cpp}
-\lstinputlisting[language=Octave, caption=Octave to Plot Results for Blasius]{/home/ryan/Documents/NumLib/examples/blasius/plot_results.m}
-
-\lstinputlisting[language=Octave, caption=Main for Poisson's Equation]{/home/ryan/Documents/OONM/Homework/NinjasProject/poisson_matlab_tests.m}
-\lstinputlisting[language=Octave, caption=Implementation of Steepest Decent]{/home/ryan/Documents/OONM/Homework/NinjasProject/sd_solver.m}
-\lstinputlisting[language=Octave, caption=Implementation of Liebmann Iteration]{/home/ryan/Documents/OONM/Homework/NinjasProject/liebmann.m}
+\lstinputlisting[caption=g++ with O3 optimization flag]{../outputgpp}
+\lstinputlisting[caption=g++ with Ofast optimization flag]{../outputgppfast}
+\lstinputlisting[caption=clang++ with O3 optimization flag]{../outputclang}
 
 \end{document}
 

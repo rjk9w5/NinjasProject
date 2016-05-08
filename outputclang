@@ -1,0 +1,40 @@
+Steepest Descent: N = 5
+Iterations: 59
+Time elapsed: 0.000456367s.
+
+Gauss-Seidel: N = 5
+Iterations: 31
+Time elapsed: 0.000169539s.
+
+Steepest Descent: N = 10
+Iterations: 311
+Time elapsed: 0.00570488s.
+
+Gauss-Seidel: N = 10
+Iterations: 155
+Time elapsed: 0.00253406s.
+
+Steepest Descent: N = 20
+Iterations: 1347
+Time elapsed: 0.245213s.
+
+Gauss-Seidel: N = 20
+Iterations: 663
+Time elapsed: 0.113676s.
+
+Steepest Descent: N = 30
+Iterations: 3065
+Time elapsed: 2.19777s.
+
+Gauss-Seidel: N = 30
+Iterations: 1510
+Time elapsed: 1.01883s.
+
+Steepest Descent: N = 50
+Iterations: 8507
+Time elapsed: 38.4931s.
+
+Gauss-Seidel: N = 50
+Iterations: 4185
+Time elapsed: 17.4963s.
+

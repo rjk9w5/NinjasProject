@@ -29,8 +29,8 @@ int main(int argc, char ** argv)
   long double h;
   long double exact_average, numeric_averageSD, numeric_averageGS;
   // Iteration variables for soltion comparisons
-  Vector<int> N({5, 10, 20, 30, 50});
-  Vector<std::string> N_strings({"5", "10", "20", "30", "50"});
+  Vector<int> N({5, 10, 15, 20, 25, 30, 40, 45, 50});
+  Vector<std::string> N_strings({"5", "10", "15", "20", "25", "30", "40", "45", "50"});
 
   std::ofstream fout;
 

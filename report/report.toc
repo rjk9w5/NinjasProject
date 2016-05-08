@@ -1,10 +1,10 @@
-\contentsline {section}{\numberline {I}Introduction}{3}
-\contentsline {section}{\numberline {II}Models}{3}
-\contentsline {subsection}{\numberline {II.A}Blasius Boundary Layer}{3}
-\contentsline {subsection}{\numberline {II.B}Poisson's Equation}{4}
-\contentsline {subsubsection}{\numberline {II.B.1}Liebmann Method}{7}
-\contentsline {subsubsection}{\numberline {II.B.2}Steepest Decent}{7}
-\contentsline {section}{\numberline {III}Results}{8}
-\contentsline {subsection}{\numberline {III.A}Blasius Boundary Layer}{8}
-\contentsline {subsection}{\numberline {III.B}Poisson's Equation}{9}
-\contentsline {section}{\numberline {IV}Conclusion}{11}
+\contentsline {section}{\numberline {I}Models}{3}
+\contentsline {subsection}{\numberline {I.A}Poisson's Equation}{3}
+\contentsline {subsubsection}{\numberline {I.A.1}Liebmann Method}{5}
+\contentsline {subsubsection}{\numberline {I.A.2}Steepest Descent}{6}
+\contentsline {subsection}{\numberline {I.B}Data Structures}{7}
+\contentsline {subsubsection}{\numberline {I.B.1}Matrices}{7}
+\contentsline {section}{\numberline {II}Results}{7}
+\contentsline {subsection}{\numberline {II.A}Solutions}{7}
+\contentsline {subsection}{\numberline {II.B}Error-Time-Iterations}{9}
+\contentsline {section}{\numberline {III}Conclusion}{9}

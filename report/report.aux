@@ -1,61 +1,48 @@
 \relax 
-\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Models}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.A}Blasius Boundary Layer}{3}}
-\newlabel{e:blas_diff}{{1}{3}}
-\newlabel{e:blas_trans}{{2}{3}}
-\newlabel{e:blas_stream}{{3}{3}}
-\newlabel{e:blas_u}{{4}{3}}
-\newlabel{e:blas_v}{{5}{4}}
-\newlabel{e:blas_shear}{{6}{4}}
-\newlabel{e:blas_cupode}{{7}{4}}
-\newlabel{e:blas_bc}{{8}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II.B}Poisson's Equation}{4}}
-\newlabel{e:p_diff}{{9}{4}}
-\newlabel{e:p_f}{{10}{5}}
-\newlabel{e:p_bcx}{{11}{5}}
-\newlabel{e:p_bcy}{{12}{5}}
-\newlabel{e:p_exact}{{13}{5}}
-\newlabel{e:p_num}{{14}{5}}
-\newlabel{e:p_num_simp}{{15}{5}}
-\newlabel{f:cdiff_grid}{{II.B}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Grid with points used in central difference discretized Poisson}}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.B.1}Liebmann Method}{7}}
-\newlabel{e:lieb_it}{{16}{7}}
-\newlabel{e:lieb_it2}{{17}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II.B.2}Steepest Decent}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Models}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {I.A}Poisson's Equation}{3}}
+\newlabel{e:p_diff}{{1}{3}}
+\newlabel{e:p_f}{{2}{3}}
+\newlabel{e:p_bcx}{{3}{3}}
+\newlabel{e:p_bcy}{{4}{3}}
+\newlabel{e:p_exact}{{5}{3}}
+\newlabel{e:p_num}{{6}{3}}
+\newlabel{e:p_num_simp}{{7}{3}}
+\newlabel{f:cdiff_grid}{{I.A}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Grid with points used in central difference discretized Poisson}}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {I.A.1}Liebmann Method}{5}}
+\newlabel{e:lieb_it}{{8}{5}}
 \citation{holmes:07bk}
-\newlabel{e:p_sk}{{18}{8}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Results}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III.A}Blasius Boundary Layer}{8}}
-\newlabel{t:blas_interror}{{III.A}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Results from solving the Blasius Boundary Layer equation}}{9}}
-\newlabel{f:blas_plots}{{2}{9}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Stream Function}}}{9}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Scaled Velocity Profile}}}{9}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Wall Shear Stress}}}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III.B}Poisson's Equation}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Results from solving the Blasius Boundary Layer equation}}{10}}
-\newlabel{f:p_results}{{3}{10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Exact Solution}}}{10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Steepest Decent Solution}}}{10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Liebmann Solution}}}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Results from solving the Blasius Boundary Layer equation}}{10}}
-\newlabel{f:p_convergeplot}{{4}{10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Steepest Decent error vs iteration}}}{10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Liebmann error vs iteration}}}{10}}
+\newlabel{e:lieb_it2}{{9}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {I.A.2}Steepest Descent}{6}}
+\newlabel{e:p_sk}{{10}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {I.B}Data Structures}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {I.B.1}Matrices}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Results}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.A}Solutions}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Plots of the results to the Poisson for a 10x10 solution grid}}{8}}
+\newlabel{f:p_results}{{2}{8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Exact Solution}}}{8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Steepest Decent Solution}}}{8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Liebmann Solution}}}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Convergence plot from the solution of the 10x10 grid}}{8}}
+\newlabel{f:p_convergeplot}{{3}{8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Steepest Decent error vs iteration}}}{8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Liebmann error vs iteration}}}{8}}
 \bibcite{holmes:07bk}{1}
-\bibcite{anderson:01bk}{2}
-\bibcite{chapraetal:15bk}{3}
-\bibcite{cfdonline:web}{4}
-\bibcite{hosder:lec}{5}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Conclusion}{11}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Main for Blasius Solver}{12}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Implementation of Blasius Routine}{12}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Octave to Plot Results for Blasius}{13}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Main for Poisson's Equation}{13}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Implementation of Steepest Decent}{16}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}Implementation of Liebmann Iteration}{16}}
-\newlabel{LastPage}{{}{17}}
-\xdef\lastpage@lastpage{17}
+\bibcite{chapraetal:15bk}{2}
+\bibcite{cfdonline:web}{3}
+\bibcite{bartnack:94bk}{4}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II.B}Error-Time-Iterations}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence plot from the solution of the 10x10 grid}}{9}}
+\newlabel{f:p_convergeplot}{{4}{9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Iteration vs N}}}{9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Time vs N}}}{9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Total Error vs N}}}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Conclusion}{9}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}g++ with O3 optimization flag}{10}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}g++ with Ofast optimization flag}{10}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}clang++ with O3 optimization flag}{11}}
+\newlabel{LastPage}{{}{12}}
+\xdef\lastpage@lastpage{12}
 \gdef\lastpage@lastpageHy{}
