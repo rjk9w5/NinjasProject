@@ -61,8 +61,6 @@ TESTER_EXE = tester
 # Targets
 ################################################################################
 
-all: drive test
-
 ### Default target
 default: drive
 
